@@ -1,0 +1,40 @@
+[versions]
+compose = "1.5.4"
+compose-plugin = "1.5.10"
+compose-compiler = "1.5.3"
+agp = "8.1.2"
+android-minSdk = "24"
+android-compileSdk = "34"
+android-targetSdk = "34"
+androidx-activityCompose = "1.8.0"
+androidx-core-ktx = "1.12.0"
+androidx-appcompat = "1.6.1"
+androidx-material = "1.10.0"
+androidx-constraintlayout = "2.1.4"
+androidx-test-junit = "1.1.5"
+androidx-espresso-core = "3.5.1"
+kotlin = "1.9.20"
+junit = "4.13.2"
+
+[libraries]
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "compose" }
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+compose-material = { module = "androidx.compose.material:material", version.ref = "compose" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core-ktx" }
+androidx-test-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-junit" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-espresso-core" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "androidx-appcompat" }
+androidx-material = { group = "com.google.android.material", name = "material", version.ref = "androidx-material" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "androidx-constraintlayout" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+
+[plugins]
+jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
