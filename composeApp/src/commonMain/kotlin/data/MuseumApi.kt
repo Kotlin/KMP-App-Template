@@ -3,7 +3,6 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
 import io.ktor.http.ContentType
-import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
@@ -20,10 +19,5 @@ object MuseumApi {
         }
     }
 
-    suspend fun loadData(): List<MuseumObject> {
-        val res = client.get(API_URL) {
-            contentType(ContentType.Application.Json)
-        }
-         return res.body<List<MuseumObject>>()
-    }
+    suspend fun loadData(): List<MuseumObject> = client.get(API_URL).body()
 }

@@ -10,4 +10,5 @@ data class MuseumObject(
     val objectURL: String,
     val objectDate: String,
     val primaryImage: String,
+    val primaryImageSmall: String,
 )
