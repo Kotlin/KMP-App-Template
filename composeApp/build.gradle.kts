@@ -49,7 +49,9 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
 
             implementation(libs.kamel)
+            implementation(libs.koin.core)
             implementation(libs.voyager.navigator)
+            implementation(libs.voyager.koin)
         }
     }
 }
