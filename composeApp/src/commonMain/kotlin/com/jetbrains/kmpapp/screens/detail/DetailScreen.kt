@@ -35,26 +35,31 @@ import io.kamel.image.asyncPainterResource
 data class DetailScreen(val objectId: Int) : Screen {
     @Composable
     override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
         val viewModel: DetailViewModel = getScreenModel()
+
         val obj = viewModel.getObject(objectId).collectAsState(initial = null).value
         if (obj != null) {
-            ObjectDetails(obj)
+            ObjectDetails(obj, onBackClick = { navigator.pop() })
         }
     }
 }
 
 @Composable
-private fun ObjectDetails(obj: MuseumObject) {
-    val navigator = LocalNavigator.currentOrThrow
-
+private fun ObjectDetails(
+    obj: MuseumObject,
+    onBackClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Scaffold(
         topBar = {
             TopAppBar(backgroundColor = Color.White) {
-                IconButton(onClick = { navigator.pop() }) {
+                IconButton(onClick = onBackClick) {
                     Icon(Icons.Default.ArrowBack, "Back")
                 }
             }
-        }
+        },
+        modifier = modifier,
     ) {
         Column(
             Modifier.verticalScroll(rememberScrollState())
@@ -93,8 +98,12 @@ private fun ObjectDetails(obj: MuseumObject) {
 }
 
 @Composable
-fun LabeledInfo(label: String, data: String) {
-    Column(Modifier.padding(vertical = 4.dp)) {
+private fun LabeledInfo(
+    label: String,
+    data: String,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier.padding(vertical = 4.dp)) {
         Text(label, style = MaterialTheme.typography.subtitle2)
         Spacer(Modifier.height(2.dp))
         Text(data, style = MaterialTheme.typography.body1)

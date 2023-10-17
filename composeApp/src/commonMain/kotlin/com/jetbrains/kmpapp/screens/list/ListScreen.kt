@@ -35,34 +35,47 @@ import io.kamel.image.asyncPainterResource
 data object ListScreen : Screen {
     @Composable
     override fun Content() {
+        val navigator = LocalNavigator.currentOrThrow
         val viewModel: ListViewModel = getScreenModel()
+
         val objects by viewModel.objects.collectAsState()
-        ObjectGrid(objects)
+        ObjectGrid(
+            objects = objects,
+            onObjectClick = { objectId ->
+                navigator.push(DetailScreen(objectId))
+            }
+        )
     }
 }
 
 @Composable
-private fun ObjectGrid(objects: List<MuseumObject>) {
-    val navigator = LocalNavigator.currentOrThrow
-
+private fun ObjectGrid(
+    objects: List<MuseumObject>,
+    onObjectClick: (Int) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(180.dp),
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(8.dp)
     ) {
         items(objects, key = { it.objectID }) { obj ->
             ObjectFrame(
                 obj = obj,
-                onClick = { navigator.push(DetailScreen(obj.objectID)) }
+                onClick = { onObjectClick(obj.objectID) },
             )
         }
     }
 }
 
 @Composable
-fun ObjectFrame(obj: MuseumObject, onClick: () -> Unit) {
+private fun ObjectFrame(
+    obj: MuseumObject,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Column(
-        Modifier
+        modifier
             .padding(8.dp)
             .clickable { onClick() }
     ) {
