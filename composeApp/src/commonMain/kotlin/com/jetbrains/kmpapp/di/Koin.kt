@@ -1,7 +1,11 @@
 package com.jetbrains.kmpapp.di
 
+import com.jetbrains.kmpapp.data.InMemoryMuseumStorage
 import com.jetbrains.kmpapp.screens.list.ListViewModel
+import com.jetbrains.kmpapp.data.KtorMuseumApi
 import com.jetbrains.kmpapp.data.MuseumApi
+import com.jetbrains.kmpapp.data.MuseumRepository
+import com.jetbrains.kmpapp.data.MuseumStorage
 import com.jetbrains.kmpapp.screens.detail.DetailViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -23,7 +27,10 @@ val dataModule = module {
             }
         }
     }
-    singleOf(::MuseumApi)
+
+    single<MuseumApi> { KtorMuseumApi(get()) }
+    single<MuseumStorage> { InMemoryMuseumStorage() }
+    single { MuseumRepository(get(), get()) }
 }
 
 val viewModelsModule = module {
