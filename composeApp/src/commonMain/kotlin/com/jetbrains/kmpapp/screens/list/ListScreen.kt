@@ -1,18 +1,23 @@
-package screens.detail
+package com.jetbrains.kmpapp.screens.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -22,29 +27,44 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import data.MuseumObject
+import com.jetbrains.kmpapp.data.MuseumObject
+import com.jetbrains.kmpapp.screens.detail.DetailScreen
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
-data class DetailScreen(val objectId: Int) : Screen {
+data object ListScreen : Screen {
     @Composable
     override fun Content() {
-        val viewModel: DetailViewModel = getScreenModel()
-        val obj = viewModel.getObject(objectId).collectAsState(initial = null).value
-        if (obj != null) {
-            ObjectDetails(obj)
+        val viewModel: ListViewModel = getScreenModel()
+        val objects by viewModel.objects.collectAsState()
+        ObjectGrid(objects)
+    }
+}
+
+@Composable
+private fun ObjectGrid(objects: List<MuseumObject>) {
+    val navigator = LocalNavigator.currentOrThrow
+
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(180.dp),
+        modifier = Modifier.fillMaxSize(),
+        contentPadding = PaddingValues(8.dp)
+    ) {
+        items(objects, key = { it.objectID }) { obj ->
+            ObjectFrame(
+                obj = obj,
+                onClick = { navigator.push(DetailScreen(obj.objectID)) }
+            )
         }
     }
 }
 
 @Composable
-private fun ObjectDetails(obj: MuseumObject) {
-    val navigator = LocalNavigator.currentOrThrow
-
+fun ObjectFrame(obj: MuseumObject, onClick: () -> Unit) {
     Column(
         Modifier
             .padding(8.dp)
-            .verticalScroll(rememberScrollState())
+            .clickable { onClick() }
     ) {
         KamelImage(
             resource = asyncPainterResource(data = obj.primaryImageSmall),
@@ -52,19 +72,16 @@ private fun ObjectDetails(obj: MuseumObject) {
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
-                .background(Color.LightGray)
-                // TODO proper back navigation
-                .clickable { navigator.pop() },
+                .aspectRatio(1f)
+                .background(Color.LightGray),
         )
 
         Spacer(Modifier.height(2.dp))
 
-        Text(obj.title, style = MaterialTheme.typography.h5)
+        Text(obj.title, style = MaterialTheme.typography.h6)
         if (obj.artistDisplayName.isNotEmpty()) {
             Text(obj.artistDisplayName)
         }
         Text(obj.objectDate, fontStyle = FontStyle.Italic)
-        Text(obj.dimensions)
-        Text(obj.medium)
     }
 }

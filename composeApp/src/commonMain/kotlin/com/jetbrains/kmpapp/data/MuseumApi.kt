@@ -1,4 +1,4 @@
-package data
+package com.jetbrains.kmpapp.data
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body

@@ -1,4 +1,4 @@
-package data
+package com.jetbrains.kmpapp.data
 
 import kotlinx.serialization.Serializable
 
@@ -13,4 +13,7 @@ data class MuseumObject(
     val objectDate: String,
     val primaryImage: String,
     val primaryImageSmall: String,
+    val repository: String,
+    val department: String,
+    val creditLine: String,
 )

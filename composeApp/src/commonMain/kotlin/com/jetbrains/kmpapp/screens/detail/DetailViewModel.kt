@@ -1,8 +1,8 @@
-package screens.detail
+package com.jetbrains.kmpapp.screens.detail
 
 import cafe.adriel.voyager.core.model.ScreenModel
-import data.MuseumApi
-import data.MuseumObject
+import com.jetbrains.kmpapp.data.MuseumApi
+import com.jetbrains.kmpapp.data.MuseumObject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 

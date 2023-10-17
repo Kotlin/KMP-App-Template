@@ -1,6 +1,8 @@
-package di
+package com.jetbrains.kmpapp.di
 
-import data.MuseumApi
+import com.jetbrains.kmpapp.screens.list.ListViewModel
+import com.jetbrains.kmpapp.data.MuseumApi
+import com.jetbrains.kmpapp.screens.detail.DetailViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.ContentType
@@ -10,8 +12,6 @@ import org.koin.core.context.startKoin
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
-import screens.detail.DetailViewModel
-import screens.list.ListViewModel
 
 val dataModule = module {
     single {
@@ -19,7 +19,8 @@ val dataModule = module {
         HttpClient {
             install(ContentNegotiation) {
                 // TODO Fix API so it serves application/json
-                json(json, contentType = ContentType.Any) }
+                json(json, contentType = ContentType.Any)
+            }
         }
     }
     singleOf(::MuseumApi)
