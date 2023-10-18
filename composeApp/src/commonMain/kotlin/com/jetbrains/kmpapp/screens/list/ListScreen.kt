@@ -92,9 +92,7 @@ private fun ObjectFrame(
         Spacer(Modifier.height(2.dp))
 
         Text(obj.title, style = MaterialTheme.typography.h6)
-        if (obj.artistDisplayName.isNotEmpty()) {
-            Text(obj.artistDisplayName)
-        }
+        Text(obj.artistDisplayName)
         Text(obj.objectDate, fontStyle = FontStyle.Italic)
     }
 }

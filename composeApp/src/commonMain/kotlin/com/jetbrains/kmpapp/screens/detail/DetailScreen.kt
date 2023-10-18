@@ -60,9 +60,11 @@ private fun ObjectDetails(
             }
         },
         modifier = modifier,
-    ) {
+    ) { paddingValues ->
         Column(
-            Modifier.verticalScroll(rememberScrollState())
+            Modifier
+                .verticalScroll(rememberScrollState())
+                .padding(paddingValues)
         ) {
             KamelImage(
                 resource = asyncPainterResource(data = obj.primaryImageSmall),
