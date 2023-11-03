@@ -68,7 +68,7 @@ private fun ObjectDetails(
         ) {
             KamelImage(
                 resource = asyncPainterResource(data = obj.primaryImageSmall),
-                contentDescription = null,
+                contentDescription = obj.title,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
                     .fillMaxWidth()
