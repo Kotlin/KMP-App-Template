@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -81,6 +82,8 @@ private fun ObjectDetails(
 
             SelectionContainer {
                 Column(Modifier.padding(12.dp)) {
+                    Text(obj.title, style = MaterialTheme.typography.h6.copy(fontWeight = FontWeight.Bold))
+                    Spacer(Modifier.height(6.dp))
                     LabeledInfo(stringResource(MR.strings.label_title), obj.title)
                     LabeledInfo(stringResource(MR.strings.label_artist), obj.artistDisplayName)
                     LabeledInfo(stringResource(MR.strings.label_date), obj.objectDate)
@@ -102,6 +105,7 @@ private fun LabeledInfo(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier.padding(vertical = 4.dp)) {
+        Spacer(Modifier.height(6.dp))
         Text(
             buildAnnotatedString {
                 withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
@@ -110,6 +114,5 @@ private fun LabeledInfo(
                 append(data)
             }
         )
-        Spacer(Modifier.height(6.dp))
     }
 }
