@@ -21,7 +21,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
@@ -91,8 +91,8 @@ private fun ObjectFrame(
 
         Spacer(Modifier.height(2.dp))
 
-        Text(obj.title, style = MaterialTheme.typography.h6)
-        Text(obj.artistDisplayName)
-        Text(obj.objectDate, fontStyle = FontStyle.Italic)
+        Text(obj.title, style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Bold))
+        Text(obj.artistDisplayName, style = MaterialTheme.typography.body2)
+        Text(obj.objectDate, style = MaterialTheme.typography.caption)
     }
 }

@@ -11,7 +11,6 @@ import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -22,7 +21,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
@@ -77,17 +79,9 @@ private fun ObjectDetails(
 
             SelectionContainer {
                 Column(Modifier.padding(12.dp)) {
-                    Text(obj.title, style = MaterialTheme.typography.h5)
-                    Text(obj.artistDisplayName, style = MaterialTheme.typography.h6)
-
-                    Text(
-                        obj.objectDate,
-                        fontStyle = FontStyle.Italic,
-                        style = MaterialTheme.typography.subtitle1
-                    )
-
-                    Spacer(Modifier.height(12.dp))
-
+                    LabeledInfo("Title", obj.title)
+                    LabeledInfo("Artist", obj.artistDisplayName)
+                    LabeledInfo("Date", obj.objectDate)
                     LabeledInfo("Dimensions", obj.dimensions)
                     LabeledInfo("Medium", obj.medium)
                     LabeledInfo("Department", obj.department)
@@ -106,8 +100,14 @@ private fun LabeledInfo(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier.padding(vertical = 4.dp)) {
-        Text(label, style = MaterialTheme.typography.subtitle2)
-        Spacer(Modifier.height(2.dp))
-        Text(data, style = MaterialTheme.typography.body1)
+        Text(
+            buildAnnotatedString {
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append("$label: ")
+                }
+                append(data)
+            }
+        )
+        Spacer(Modifier.height(6.dp))
     }
 }
