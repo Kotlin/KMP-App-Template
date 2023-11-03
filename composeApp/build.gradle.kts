@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.mokoResources)
 }
 
 kotlin {
@@ -15,7 +16,7 @@ kotlin {
             }
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -26,13 +27,21 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     sourceSets {
-        androidMain.dependencies {
-            implementation(libs.compose.ui)
-            implementation(libs.compose.ui.tooling.preview)
-            implementation(libs.androidx.activity.compose)
-            implementation(libs.ktor.client.okhttp)
+        // Required for moko-resources to work
+        applyDefaultHierarchyTemplate()
+
+        androidMain {
+            dependencies {
+                implementation(libs.compose.ui)
+                implementation(libs.compose.ui.tooling.preview)
+                implementation(libs.androidx.activity.compose)
+                implementation(libs.ktor.client.okhttp)
+            }
+
+            // Required for moko-resources to work
+            dependsOn(commonMain.get())
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -53,6 +62,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.koin)
+            implementation(libs.moko.resources.compose)
         }
     }
 }
@@ -97,3 +107,6 @@ android {
     }
 }
 
+multiplatformResources {
+    multiplatformResourcesPackage = "com.jetbrains.kmpapp"
+}
