@@ -1,5 +1,6 @@
 package com.jetbrains.kmpapp.screens.list
 
+import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -28,6 +30,7 @@ import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.jetbrains.kmpapp.data.MuseumObject
+import com.jetbrains.kmpapp.screens.EmptyScreenContent
 import com.jetbrains.kmpapp.screens.detail.DetailScreen
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -39,12 +42,19 @@ data object ListScreen : Screen {
         val viewModel: ListViewModel = getScreenModel()
 
         val objects by viewModel.objects.collectAsState()
-        ObjectGrid(
-            objects = objects,
-            onObjectClick = { objectId ->
-                navigator.push(DetailScreen(objectId))
+
+        AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
+            if (objectsAvailable) {
+                ObjectGrid(
+                    objects = objects,
+                    onObjectClick = { objectId ->
+                        navigator.push(DetailScreen(objectId))
+                    }
+                )
+            } else {
+                EmptyScreenContent(Modifier.fillMaxSize())
             }
-        )
+        }
     }
 }
 
@@ -54,6 +64,7 @@ private fun ObjectGrid(
     onObjectClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    LazyRow() {  }
     LazyVerticalGrid(
         columns = GridCells.Adaptive(180.dp),
         modifier = modifier.fillMaxSize(),

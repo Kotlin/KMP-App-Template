@@ -10,4 +10,6 @@
     <string name="label_credits">Credits</string>
 
     <string name="back">Back</string>
+
+    <string name="no_data_available">No data available</string>
 </resources>

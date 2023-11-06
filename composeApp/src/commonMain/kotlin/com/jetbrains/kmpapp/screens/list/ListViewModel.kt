@@ -2,7 +2,6 @@ package com.jetbrains.kmpapp.screens.list
 
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.coroutineScope
-import com.jetbrains.kmpapp.data.KtorMuseumApi
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.data.MuseumRepository
 import kotlinx.coroutines.flow.SharingStarted
