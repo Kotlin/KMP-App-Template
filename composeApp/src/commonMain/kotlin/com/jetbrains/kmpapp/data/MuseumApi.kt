@@ -12,7 +12,7 @@ interface MuseumApi {
 class KtorMuseumApi(private val client: HttpClient) : MuseumApi {
     companion object {
         private const val API_URL =
-            "https://raw.githubusercontent.com/zsmb13/metapi-sample/main/list.json"
+            "https://raw.githubusercontent.com/zsmb13/KMP-App-Template/main/list.json"
     }
 
     override suspend fun getData(): List<MuseumObject> {
@@ -20,6 +20,7 @@ class KtorMuseumApi(private val client: HttpClient) : MuseumApi {
             client.get(API_URL).body()
         } catch (e: Exception) {
             if (e is CancellationException) throw e
+            e.printStackTrace()
 
             emptyList()
         }
