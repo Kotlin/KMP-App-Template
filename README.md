@@ -1,14 +1,21 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# Kotlin Multiplatform app template
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+This is a basic Kotlin Multiplatform app template for Android and iOS. It includes shared business logic and data handling, and a shared UI implementation using Compose Multiplatform.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+> The template is also available [with native UI written in Jetpack Compose and SwiftUI](https://github.com/kotlin/KMP-App-Template-Native).
 
+![Screenshots of the app]()
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+### Technologies
+
+The data displayed by the app is from [The Metropolitan Museum of Art Collection API](https://metmuseum.github.io/).
+
+The app uses the following multiplatform dependencies in its implementation:
+
+- [Compose Multiplatform](https://jb.gg/compose) for UI
+- [Ktor](https://ktor.io/) for networking
+- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for JSON handling
+- [Kamel](https://github.com/Kamel-Media/Kamel) for image loading
+- [moko-resources](https://github.com/icerockdev/moko-resources) for string resources
+- [Koin](https://github.com/InsertKoinIO/koin) for dependency injection
+- [Voyager](https://github.com/adrielcafe/voyager) for navigation and screen models
