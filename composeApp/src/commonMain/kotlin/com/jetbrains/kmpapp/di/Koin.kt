@@ -29,7 +29,11 @@ val dataModule = module {
 
     single<MuseumApi> { KtorMuseumApi(get()) }
     single<MuseumStorage> { InMemoryMuseumStorage() }
-    single { MuseumRepository(get(), get()) }
+    single {
+        MuseumRepository(get(), get()).apply {
+            initialize()
+        }
+    }
 }
 
 val viewModelsModule = module {

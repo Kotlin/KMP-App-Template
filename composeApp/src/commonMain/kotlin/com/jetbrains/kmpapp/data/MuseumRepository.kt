@@ -1,36 +1,27 @@
 package com.jetbrains.kmpapp.data
 
-import kotlinx.atomicfu.AtomicBoolean
-import kotlinx.atomicfu.atomic
-import kotlinx.atomicfu.getAndUpdate
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 
 class MuseumRepository(
     private val museumApi: MuseumApi,
     private val museumStorage: MuseumStorage,
 ) {
-    private val initialized: AtomicBoolean = atomic(false)
-    private suspend fun initIfNeeded() {
-        initialized.getAndUpdate { inited ->
-            if (!inited)
-                museumStorage.saveObjects(museumApi.getData())
-            true
+    private val scope = CoroutineScope(SupervisorJob())
+
+    fun initialize() {
+        scope.launch {
+            refresh()
         }
     }
 
-    fun getObjects(): Flow<List<MuseumObject>> {
-        return flow {
-            initIfNeeded()
-            emitAll(museumStorage.getObjects())
-        }
+    suspend fun refresh() {
+        museumStorage.saveObjects(museumApi.getData())
     }
 
-    fun getObjectById(objectId: Int): Flow<MuseumObject?> {
-        return flow {
-            initIfNeeded()
-            emitAll(museumStorage.getObjectById(objectId))
-        }
-    }
+    fun getObjects(): Flow<List<MuseumObject>> = museumStorage.getObjects()
+
+    fun getObjectById(objectId: Int): Flow<MuseumObject?> = museumStorage.getObjectById(objectId)
 }
