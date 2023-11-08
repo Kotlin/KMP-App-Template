@@ -45,9 +45,9 @@ data class DetailScreen(val objectId: Int) : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val viewModel: DetailViewModel = getScreenModel()
+        val screenModel: DetailScreenModel = getScreenModel()
 
-        val obj by viewModel.getObject(objectId).collectAsState(initial = null)
+        val obj by screenModel.getObject(objectId).collectAsState(initial = null)
         AnimatedContent(obj != null) { objectAvailable ->
             if (objectAvailable) {
                 ObjectDetails(obj!!, onBackClick = { navigator.pop() })

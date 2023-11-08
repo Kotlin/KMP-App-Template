@@ -39,9 +39,9 @@ data object ListScreen : Screen {
     @Composable
     override fun Content() {
         val navigator = LocalNavigator.currentOrThrow
-        val viewModel: ListViewModel = getScreenModel()
+        val screenModel: ListScreenModel = getScreenModel()
 
-        val objects by viewModel.objects.collectAsState()
+        val objects by screenModel.objects.collectAsState()
 
         AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
             if (objectsAvailable) {

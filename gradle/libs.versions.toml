@@ -18,7 +18,7 @@ kotlin = "1.9.20"
 junit = "4.13.2"
 ktor = "2.3.5"
 kamel = "0.7.3"
-voyager = "1.0.0-rc07"
+voyager = "1.0.0-rc10"
 moko-resources = "0.23.0"
 
 [libraries]

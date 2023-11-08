@@ -5,7 +5,7 @@ import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.data.MuseumRepository
 import kotlinx.coroutines.flow.Flow
 
-class DetailViewModel(private val museumRepository: MuseumRepository) : ScreenModel {
+class DetailScreenModel(private val museumRepository: MuseumRepository) : ScreenModel {
     fun getObject(objectId: Int): Flow<MuseumObject?> =
         museumRepository.getObjectById(objectId)
 }
