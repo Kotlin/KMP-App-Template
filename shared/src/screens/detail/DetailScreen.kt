@@ -34,10 +34,10 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.jetbrains.kmpapp.MR
+//import com.jetbrains.kmpapp.MR
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
-import dev.icerock.moko.resources.compose.stringResource
+//import dev.icerock.moko.resources.compose.stringResource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
@@ -68,7 +68,7 @@ private fun ObjectDetails(
         topBar = {
             TopAppBar(backgroundColor = Color.White) {
                 IconButton(onClick = onBackClick) {
-                    Icon(Icons.Default.ArrowBack, stringResource(MR.strings.back))
+                    Icon(Icons.Default.ArrowBack, "Back")
                 }
             }
         },
@@ -92,14 +92,14 @@ private fun ObjectDetails(
                 Column(Modifier.padding(12.dp)) {
                     Text(obj.title, style = MaterialTheme.typography.h6.copy(fontWeight = FontWeight.Bold))
                     Spacer(Modifier.height(6.dp))
-                    LabeledInfo(stringResource(MR.strings.label_title), obj.title)
-                    LabeledInfo(stringResource(MR.strings.label_artist), obj.artistDisplayName)
-                    LabeledInfo(stringResource(MR.strings.label_date), obj.objectDate)
-                    LabeledInfo(stringResource(MR.strings.label_dimensions), obj.dimensions)
-                    LabeledInfo(stringResource(MR.strings.label_medium), obj.medium)
-                    LabeledInfo(stringResource(MR.strings.label_department), obj.department)
-                    LabeledInfo(stringResource(MR.strings.label_repository), obj.repository)
-                    LabeledInfo(stringResource(MR.strings.label_credits), obj.creditLine)
+                    LabeledInfo("Title", obj.title)
+                    LabeledInfo("Artist", obj.artistDisplayName)
+                    LabeledInfo("Date", obj.objectDate)
+                    LabeledInfo("Dimensions", obj.dimensions)
+                    LabeledInfo("Medium", obj.medium)
+                    LabeledInfo("Department", obj.department)
+                    LabeledInfo("Repository", obj.repository)
+                    LabeledInfo("Credits", obj.creditLine)
                 }
             }
         }

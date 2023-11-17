@@ -1,15 +1,15 @@
 //import org.jetbrains.compose.ExperimentalComposeLibrary
 //import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 //
-plugins {
-////    alias(libs.plugins.kotlinMultiplatform)
-////    alias(libs.plugins.androidApplication)
-////    alias(libs.plugins.jetbrainsCompose)
-////    alias(libs.plugins.kotlinxSerialization)
-    alias(libs.plugins.mokoResources)
-}
+//plugins {
+//    alias(libs.plugins.kotlinMultiplatform)
+//    alias(libs.plugins.androidApplication)
+//    alias(libs.plugins.jetbrainsCompose)
+//    alias(libs.plugins.kotlinxSerialization)
+//    alias(libs.plugins.mokoResources)
+//}
 //
-kotlin {
+//kotlin {
 //    androidTarget {
 //        compilations.all {
 //            kotlinOptions {
@@ -29,11 +29,11 @@ kotlin {
 //        }
 //    }
 //
-    sourceSets {
-        // Required for moko-resources to work
-        applyDefaultHierarchyTemplate()
+//    sourceSets {
+//        // Required for moko-resources to work
+//        applyDefaultHierarchyTemplate()
 //
-        androidMain {
+//        androidMain {
 //            dependencies {
 //                implementation(libs.compose.ui)
 //                implementation(libs.compose.ui.tooling.preview)
@@ -41,9 +41,9 @@ kotlin {
 //                implementation(libs.ktor.client.okhttp)
 //            }
 //
-            // Required for moko-resources to work
-            dependsOn(commonMain.get())
-        }
+//            // Required for moko-resources to work
+//            dependsOn(commonMain.get())
+//        }
 //        iosMain.dependencies {
 //            implementation(libs.ktor.client.darwin)
 //        }
@@ -62,8 +62,8 @@ kotlin {
 //            implementation(libs.voyager.koin)
 //            implementation(libs.moko.resources.compose)
 //        }
-    }
-}
+//    }
+//}
 //
 //android {
 //    namespace = "com.jetbrains.kmpapp"
@@ -105,6 +105,6 @@ kotlin {
 //    }
 //}
 //
-multiplatformResources {
-    multiplatformResourcesPackage = "com.jetbrains.kmpapp"
-}
+//multiplatformResources {
+//    multiplatformResourcesPackage = "com.jetbrains.kmpapp"
+//}
