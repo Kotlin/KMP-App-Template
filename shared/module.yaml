@@ -17,3 +17,5 @@ dependencies:
 
 settings: 
   compose: enabled
+  kotlin:
+    serialization: json
