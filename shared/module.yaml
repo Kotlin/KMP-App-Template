@@ -1,0 +1,19 @@
+product: 
+  type: lib
+  platforms: [jvm, android, iosArm64, iosSimulatorArm64]
+
+dependencies: 
+  - $compose.runtime
+  - $compose.foundation
+  - $compose.material
+  - io.ktor:ktor-client-core:2.3.5
+  - io.ktor:ktor-client-content-negotiation:2.3.5
+  - io.ktor:ktor-serialization-kotlinx-json:2.3.5
+  - media.kamel:kamel-image:0.7.3
+  - io.insert-koin:koin-core:3.5.0
+  - cafe.adriel.voyager:voyager-navigator:1.0.0-rc10
+  - cafe.adriel.voyager:voyager-koin:1.0.0-rc10
+  - dev.icerock.moko:resources-compose:0.23.0
+
+settings: 
+  compose: enabled

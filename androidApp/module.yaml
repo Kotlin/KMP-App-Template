@@ -1,0 +1,11 @@
+product: android/app
+
+dependencies:
+  - ../shared
+  - androidx.compose.ui:ui:1.5.4
+  - androidx.compose.ui:ui-tooling-preview:1.5.4
+  - androidx.activity:activity-compose:1.8.0
+  - io.ktor:ktor-client-okhttp:2.3.5
+
+settings: 
+  compose: enabled
