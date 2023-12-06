@@ -13,7 +13,12 @@ dependencies:
   - io.insert-koin:koin-core:3.5.0
   - cafe.adriel.voyager:voyager-navigator:1.0.0-rc10
   - cafe.adriel.voyager:voyager-koin:1.0.0-rc10
-  - dev.icerock.moko:resources-compose:0.23.0
+
+dependencies@android:
+  - io.ktor:ktor-client-okhttp:2.3.5
+
+dependencies@ios:
+  - io.ktor:ktor-client-darwin:2.3.5
 
 settings: 
   compose: enabled

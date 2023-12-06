@@ -34,10 +34,8 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-//import com.jetbrains.kmpapp.MR
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
-//import dev.icerock.moko.resources.compose.stringResource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
 
