@@ -6,19 +6,19 @@ dependencies:
   - $compose.runtime
   - $compose.foundation
   - $compose.material
-  - io.ktor:ktor-client-core:2.3.5
-  - io.ktor:ktor-client-content-negotiation:2.3.5
-  - io.ktor:ktor-serialization-kotlinx-json:2.3.5
-  - media.kamel:kamel-image:0.7.3
-  - io.insert-koin:koin-core:3.5.0
-  - cafe.adriel.voyager:voyager-navigator:1.0.0-rc10
-  - cafe.adriel.voyager:voyager-koin:1.0.0-rc10
+  - $libs.ktor.client.core
+  - $libs.ktor.client.content.negotiation
+  - $libs.ktor.serialization.kotlinx.json
+  - $libs.kamel
+  - $libs.koin.core
+  - $libs.voyager.navigator
+  - $libs.voyager.koin
 
 dependencies@android:
-  - io.ktor:ktor-client-okhttp:2.3.5
+  - $libs.ktor.client.okhttp
 
 dependencies@ios:
-  - io.ktor:ktor-client-darwin:2.3.5
+  - $libs.ktor.client.darwin
 
 settings: 
   compose: enabled

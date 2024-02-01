@@ -4,10 +4,14 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 pluginManagement {
     repositories {
         maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
-        maven("https://maven.pkg.jetbrains.space/public/p/amper/amper")
         google()
         gradlePluginPortal()
         mavenCentral()
+
+        // Amper repositories
+        maven("https://maven.pkg.jetbrains.space/public/p/amper/amper")
+        maven("https://www.jetbrains.com/intellij-repository/releases")
+        maven("https://packages.jetbrains.team/maven/p/ij/intellij-dependencies")
     }
 }
 
@@ -20,5 +24,5 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("org.jetbrains.amper.settings.plugin").version("0.1.0")
+    id("org.jetbrains.amper.settings.plugin").version("0.2.0")
 }
