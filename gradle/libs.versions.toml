@@ -1,9 +1,9 @@
 [versions]
 compose = "1.5.4"
-androidx-activityCompose = "1.8.0"
-koin = "3.5.0"
-ktor = "2.3.5"
-kamel = "0.7.3"
+androidx-activityCompose = "1.8.2"
+koin = "3.5.3"
+ktor = "2.3.8"
+kamel = "0.9.1"
 voyager = "1.0.0"
 
 [libraries]
