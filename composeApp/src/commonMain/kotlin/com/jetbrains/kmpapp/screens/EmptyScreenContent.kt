@@ -5,9 +5,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.jetbrains.kmpapp.MR
-import dev.icerock.moko.resources.compose.stringResource
+import kmp_app_template.composeapp.generated.resources.Res
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun EmptyScreenContent(
     modifier: Modifier = Modifier,
@@ -16,6 +18,6 @@ fun EmptyScreenContent(
         modifier = modifier,
         contentAlignment = Alignment.Center,
     ) {
-        Text(stringResource(MR.strings.no_data_available))
+        Text(stringResource(Res.string.no_data_available))
     }
 }

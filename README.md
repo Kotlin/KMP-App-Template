@@ -21,7 +21,6 @@ The app uses the following multiplatform dependencies in its implementation:
 - [Ktor](https://ktor.io/) for networking
 - [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for JSON handling
 - [Kamel](https://github.com/Kamel-Media/Kamel) for image loading
-- [moko-resources](https://github.com/icerockdev/moko-resources) for string resources
 - [Koin](https://github.com/InsertKoinIO/koin) for dependency injection
 - [Voyager](https://github.com/adrielcafe/voyager) for navigation and screen models
 
