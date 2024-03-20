@@ -1,22 +1,19 @@
 [versions]
-compose-compiler = "1.5.5"
-compose-plugin = "1.5.12"
 agp = "8.2.2"
 android-minSdk = "24"
 android-compileSdk = "34"
 android-targetSdk = "34"
-androidx-activityCompose = "1.8.0"
-jetpack-compose-bom = "2024.01.00"
+androidx-activityCompose = "1.8.2"
+jetpack-compose-bom = "2024.02.02"
+compose-plugin = "1.6.0"
 koin = "3.5.3"
-kotlin = "1.9.20"
-ktor = "2.3.8"
-kamel = "0.9.1"
+kotlin = "1.9.22"
+ktor = "2.3.9"
+kamel = "0.9.4"
 voyager = "1.0.0"
-moko-resources = "0.23.0"
 
 [libraries]
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "jetpack-compose-bom" }
-compose-ui = { module = "androidx.compose.ui:ui" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
@@ -29,11 +26,9 @@ ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negoti
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
-moko-resources-compose = { module = "dev.icerock.moko:resources-compose", version.ref = "moko-resources" }
 
 [plugins]
 jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-mokoResources = { id = "dev.icerock.mobile.multiplatform-resources", version.ref = "moko-resources" }

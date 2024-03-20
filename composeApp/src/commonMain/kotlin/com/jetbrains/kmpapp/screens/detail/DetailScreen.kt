@@ -18,7 +18,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -34,12 +34,22 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.jetbrains.kmpapp.MR
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
-import dev.icerock.moko.resources.compose.stringResource
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import kmp_app_template.composeapp.generated.resources.Res
+import kmp_app_template.composeapp.generated.resources.back
+import kmp_app_template.composeapp.generated.resources.label_artist
+import kmp_app_template.composeapp.generated.resources.label_credits
+import kmp_app_template.composeapp.generated.resources.label_date
+import kmp_app_template.composeapp.generated.resources.label_department
+import kmp_app_template.composeapp.generated.resources.label_dimensions
+import kmp_app_template.composeapp.generated.resources.label_medium
+import kmp_app_template.composeapp.generated.resources.label_repository
+import kmp_app_template.composeapp.generated.resources.label_title
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.stringResource
 
 data class DetailScreen(val objectId: Int) : Screen {
     @Composable
@@ -58,6 +68,7 @@ data class DetailScreen(val objectId: Int) : Screen {
     }
 }
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun ObjectDetails(
     obj: MuseumObject,
@@ -68,7 +79,7 @@ private fun ObjectDetails(
         topBar = {
             TopAppBar(backgroundColor = Color.White) {
                 IconButton(onClick = onBackClick) {
-                    Icon(Icons.Default.ArrowBack, stringResource(MR.strings.back))
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
                 }
             }
         },
@@ -92,14 +103,14 @@ private fun ObjectDetails(
                 Column(Modifier.padding(12.dp)) {
                     Text(obj.title, style = MaterialTheme.typography.h6.copy(fontWeight = FontWeight.Bold))
                     Spacer(Modifier.height(6.dp))
-                    LabeledInfo(stringResource(MR.strings.label_title), obj.title)
-                    LabeledInfo(stringResource(MR.strings.label_artist), obj.artistDisplayName)
-                    LabeledInfo(stringResource(MR.strings.label_date), obj.objectDate)
-                    LabeledInfo(stringResource(MR.strings.label_dimensions), obj.dimensions)
-                    LabeledInfo(stringResource(MR.strings.label_medium), obj.medium)
-                    LabeledInfo(stringResource(MR.strings.label_department), obj.department)
-                    LabeledInfo(stringResource(MR.strings.label_repository), obj.repository)
-                    LabeledInfo(stringResource(MR.strings.label_credits), obj.creditLine)
+                    LabeledInfo(stringResource(Res.string.label_title), obj.title)
+                    LabeledInfo(stringResource(Res.string.label_artist), obj.artistDisplayName)
+                    LabeledInfo(stringResource(Res.string.label_date), obj.objectDate)
+                    LabeledInfo(stringResource(Res.string.label_dimensions), obj.dimensions)
+                    LabeledInfo(stringResource(Res.string.label_medium), obj.medium)
+                    LabeledInfo(stringResource(Res.string.label_department), obj.department)
+                    LabeledInfo(stringResource(Res.string.label_repository), obj.repository)
+                    LabeledInfo(stringResource(Res.string.label_credits), obj.creditLine)
                 }
             }
         }

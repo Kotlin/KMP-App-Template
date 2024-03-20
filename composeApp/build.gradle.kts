@@ -3,14 +3,13 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlinxSerialization)
-    alias(libs.plugins.mokoResources)
 }
 
 kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "1.8"
+                jvmTarget = "11"
             }
         }
     }
@@ -27,20 +26,13 @@ kotlin {
     }
 
     sourceSets {
-        // Required for moko-resources to work
-        applyDefaultHierarchyTemplate()
-
         androidMain {
             dependencies {
                 implementation(project.dependencies.platform(libs.compose.bom))
-                implementation(libs.compose.ui)
                 implementation(libs.compose.ui.tooling.preview)
                 implementation(libs.androidx.activity.compose)
                 implementation(libs.ktor.client.okhttp)
             }
-
-            // Required for moko-resources to work
-            dependsOn(commonMain.get())
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
@@ -49,6 +41,7 @@ kotlin {
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material)
+            implementation(compose.components.resources)
 
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
@@ -58,7 +51,6 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.koin)
-            implementation(libs.moko.resources.compose)
         }
     }
 }
@@ -78,12 +70,6 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -95,14 +81,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
-}
-
-multiplatformResources {
-    multiplatformResourcesPackage = "com.jetbrains.kmpapp"
 }
