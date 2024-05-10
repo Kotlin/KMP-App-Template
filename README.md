@@ -22,6 +22,5 @@ The app uses the following multiplatform dependencies in its implementation:
 - [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for JSON handling
 - [Kamel](https://github.com/Kamel-Media/Kamel) for image loading
 - [Koin](https://github.com/InsertKoinIO/koin) for dependency injection
-- [Voyager](https://github.com/adrielcafe/voyager) for navigation and screen models
 
 > These are just some of the possible libraries to use for these tasks with Kotlin Multiplatform, and their usage here isn't a strong recommendation for these specific libraries over the available alternatives. You can find a wide variety of curated multiplatform libraries in the [kmp-awesome](https://github.com/terrakok/kmp-awesome) repository.

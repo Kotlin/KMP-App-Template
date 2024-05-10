@@ -4,7 +4,7 @@ androidx-activityCompose = "1.9.2"
 androidx-ui-tooling = "1.7.0"
 compose-multiplatform = "1.6.11"
 kamel = "0.9.5"
-koin = "3.5.6"
+koin = "3.6.0-alpha1"
 kotlin = "2.0.20"
 ktor = "2.3.12"
 voyager = "1.0.0"
@@ -17,11 +17,11 @@ kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+koin-compose = { module = "io.insert-koin:koin-compose", version.ref = "koin" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
-voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
-voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

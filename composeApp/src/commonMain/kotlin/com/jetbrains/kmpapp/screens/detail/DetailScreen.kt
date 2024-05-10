@@ -30,11 +30,10 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.jetbrains.kmpapp.data.MuseumObject
+import com.jetbrains.kmpapp.data.MuseumRepository
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -49,20 +48,22 @@ import kmp_app_template.composeapp.generated.resources.label_medium
 import kmp_app_template.composeapp.generated.resources.label_repository
 import kmp_app_template.composeapp.generated.resources.label_title
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
 
-data class DetailScreen(val objectId: Int) : Screen {
-    @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
-        val screenModel: DetailScreenModel = getScreenModel()
+@Composable
+fun DetailScreen(
+    navController: NavController,
+    objectId: Int,
+    museumRepository: MuseumRepository = koinInject(),
+) {
+    val viewModel = viewModel { DetailViewModel(museumRepository) }
 
-        val obj by screenModel.getObject(objectId).collectAsState(initial = null)
-        AnimatedContent(obj != null) { objectAvailable ->
-            if (objectAvailable) {
-                ObjectDetails(obj!!, onBackClick = { navigator.pop() })
-            } else {
-                EmptyScreenContent(Modifier.fillMaxSize())
-            }
+    val obj by viewModel.getObject(objectId).collectAsState(initial = null)
+    AnimatedContent(obj != null) { objectAvailable ->
+        if (objectAvailable) {
+            ObjectDetails(obj!!, onBackClick = { navController.navigateUp() })
+        } else {
+            EmptyScreenContent(Modifier.fillMaxSize())
         }
     }
 }
