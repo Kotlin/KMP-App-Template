@@ -24,21 +24,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.jetbrains.kmpapp.data.MuseumObject
-import com.jetbrains.kmpapp.data.MuseumRepository
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinNavViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun ListScreen(
     navController: NavController,
-    museumRepository: MuseumRepository = koinInject(),
 ) {
-    val viewModel = viewModel { ListViewModel(museumRepository) }
+    @OptIn(KoinExperimentalAPI::class)
+    val viewModel = koinNavViewModel<ListViewModel>()
     val objects by viewModel.objects.collectAsState()
 
     AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->

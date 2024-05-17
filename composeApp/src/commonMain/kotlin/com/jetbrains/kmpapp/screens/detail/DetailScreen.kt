@@ -30,10 +30,8 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.jetbrains.kmpapp.data.MuseumObject
-import com.jetbrains.kmpapp.data.MuseumRepository
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
@@ -48,15 +46,16 @@ import kmp_app_template.composeapp.generated.resources.label_medium
 import kmp_app_template.composeapp.generated.resources.label_repository
 import kmp_app_template.composeapp.generated.resources.label_title
 import org.jetbrains.compose.resources.stringResource
-import org.koin.compose.koinInject
+import org.koin.compose.viewmodel.koinNavViewModel
+import org.koin.core.annotation.KoinExperimentalAPI
 
 @Composable
 fun DetailScreen(
     navController: NavController,
     objectId: Int,
-    museumRepository: MuseumRepository = koinInject(),
 ) {
-    val viewModel = viewModel { DetailViewModel(museumRepository) }
+    @OptIn(KoinExperimentalAPI::class)
+    val viewModel = koinNavViewModel<DetailViewModel>()
 
     val obj by viewModel.getObject(objectId).collectAsState(initial = null)
     AnimatedContent(obj != null) { objectAvailable ->
