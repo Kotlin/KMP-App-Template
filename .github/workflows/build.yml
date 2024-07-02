@@ -18,5 +18,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: 21
-      - name: Debug build
+      - name: Android debug build
         run: ./gradlew assembleDebug --stacktrace
+      - name: iOS debug build
+        run: cd iosApp && xcodebuild -scheme iosApp -configuration Debug -destination id=739A014C-49FA-4E19-AD3B-8526831102AB
