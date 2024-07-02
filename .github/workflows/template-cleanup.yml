@@ -14,8 +14,9 @@ jobs:
     name: Template Cleanup  
     runs-on: ubuntu-latest
     if: github.event.repository.name != 'KMP-App-Template' || github.repository_owner != 'zsmb13'
+    permissions:
+      contents: write
     steps:
-
       # Check out current repository
       - name: Fetch Sources
         uses: actions/checkout@v2
