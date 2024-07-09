@@ -1,10 +1,10 @@
 [versions]
 androidx-activityCompose = "1.9.0"
-androidx-ui-tooling = "1.6.7"
-coroutines = "1.8.0"
+androidx-ui-tooling = "1.6.8"
+coroutines = "1.8.1"
 kamel = "0.9.4"
 koin = "3.5.3"
-ktor = "2.3.10"
+ktor = "2.3.12"
 voyager = "1.0.0"
 
 [libraries]
