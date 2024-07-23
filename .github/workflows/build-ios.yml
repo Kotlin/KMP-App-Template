@@ -10,6 +10,8 @@ jobs:
   test:
     name: Build
     runs-on: macOS-latest
+    # Only run build in template repo
+    if: github.event.repository.name == 'KMP-App-Template' && github.repository_owner == 'zsmb13'
     steps:
       - name: Check out code
         uses: actions/checkout@v4
