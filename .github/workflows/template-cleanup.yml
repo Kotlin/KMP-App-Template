@@ -1,0 +1,38 @@
+# GitHub Actions Workflow responsible for cleaning up the template repository from
+# template-specific files. This workflow is supposed to be triggered automatically
+# when a new template-based repository has been created.
+
+name: Template Cleanup
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # Run cleaning process only if workflow is triggered by the non-Kotlin/KMP-App-Template repository.
+  template-cleanup:
+    name: Template Cleanup  
+    runs-on: ubuntu-latest
+    if: github.event.repository.name != 'KMP-App-Template' || github.repository_owner != 'Kotlin'
+    permissions:
+      contents: write
+    steps:
+      - name: Fetch Sources
+        uses: actions/checkout@v2
+
+      - name: Cleanup
+        run: |
+          rm -rf .github
+
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Clean up template"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
