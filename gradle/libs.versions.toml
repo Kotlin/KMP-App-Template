@@ -4,8 +4,7 @@ androidx-activityCompose = "1.9.2"
 androidx-ui-tooling = "1.7.0"
 compose-multiplatform = "1.6.11"
 kamel = "0.9.5"
-koin = "3.6.0-Beta5"
-koin-compose = "1.2.0-Beta5"
+koin = "4.0.0-RC2"
 kotlin = "2.0.20"
 ktor = "2.3.12"
 navigationCompose = "2.7.0-alpha07"
@@ -16,7 +15,7 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", versi
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidx-ui-tooling" }
 kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin-compose" }
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
