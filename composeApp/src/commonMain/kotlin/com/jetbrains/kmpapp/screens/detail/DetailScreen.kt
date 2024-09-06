@@ -48,7 +48,6 @@ import kmp_app_template.composeapp.generated.resources.label_dimensions
 import kmp_app_template.composeapp.generated.resources.label_medium
 import kmp_app_template.composeapp.generated.resources.label_repository
 import kmp_app_template.composeapp.generated.resources.label_title
-import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.stringResource
 
 data class DetailScreen(val objectId: Int) : Screen {
@@ -68,7 +67,6 @@ data class DetailScreen(val objectId: Int) : Screen {
     }
 }
 
-@OptIn(ExperimentalResourceApi::class)
 @Composable
 private fun ObjectDetails(
     obj: MuseumObject,
@@ -77,7 +75,7 @@ private fun ObjectDetails(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(backgroundColor = Color.White) {
+            TopAppBar(backgroundColor = MaterialTheme.colors.background) {
                 IconButton(onClick = onBackClick) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
                 }
