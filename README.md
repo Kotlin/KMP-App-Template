@@ -18,6 +18,7 @@ The data displayed by the app is from [The Metropolitan Museum of Art Collection
 The app uses the following multiplatform dependencies in its implementation:
 
 - [Compose Multiplatform](https://jb.gg/compose) for UI
+- [Compose Navigation](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html)
 - [Ktor](https://ktor.io/) for networking
 - [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for JSON handling
 - [Kamel](https://github.com/Kamel-Media/Kamel) for image loading
