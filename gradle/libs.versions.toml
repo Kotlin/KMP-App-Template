@@ -1,11 +1,11 @@
 [versions]
-agp = "8.4.2"
-androidx-activityCompose = "1.9.0"
-androidx-ui-tooling = "1.6.8"
-compose-plugin = "1.6.11"
+agp = "8.6.0"
+androidx-activityCompose = "1.9.2"
+androidx-ui-tooling = "1.7.0"
+compose-multiplatform = "1.6.11"
 kamel = "0.9.5"
 koin = "3.5.6"
-kotlin = "2.0.0"
+kotlin = "2.0.20"
 ktor = "2.3.12"
 voyager = "1.0.0"
 
@@ -26,6 +26,6 @@ voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-jetbrainsCompose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
