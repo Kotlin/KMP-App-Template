@@ -6,11 +6,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -65,10 +67,19 @@ private fun ObjectGrid(
     onObjectClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+
     LazyVerticalGrid(
         columns = GridCells.Adaptive(180.dp),
-        modifier = modifier.fillMaxSize(),
-        contentPadding = WindowInsets.safeDrawing.asPaddingValues(),
+        // TODO simplify padding after https://issuetracker.google.com/issues/365052672 is fixed
+        modifier = modifier.fillMaxSize()
+            .padding(
+                WindowInsets.safeDrawing
+                    .only(WindowInsetsSides.Start + WindowInsetsSides.End)
+                    .asPaddingValues()
+            ),
+        contentPadding = WindowInsets.safeDrawing
+            .only(WindowInsetsSides.Bottom + WindowInsetsSides.Top)
+            .asPaddingValues(),
     ) {
         items(objects, key = { it.objectID }) { obj ->
             ObjectFrame(
