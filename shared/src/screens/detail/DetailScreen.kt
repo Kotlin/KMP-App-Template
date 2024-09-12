@@ -64,7 +64,7 @@ private fun ObjectDetails(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar(backgroundColor = Color.White) {
+            TopAppBar(backgroundColor = MaterialTheme.colors.background) {
                 IconButton(onClick = onBackClick) {
                     Icon(Icons.Default.ArrowBack, "Back")
                 }
