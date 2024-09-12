@@ -4,6 +4,7 @@ dependencies:
   - ../shared
   - $libs.androidx.compose.ui.tooling.preview
   - $libs.androidx.activity.compose
+  - $compose.foundation
 
 settings: 
   compose: enabled
