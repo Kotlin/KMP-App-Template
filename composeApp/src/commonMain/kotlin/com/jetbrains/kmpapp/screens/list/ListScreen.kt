@@ -67,7 +67,6 @@ private fun ObjectGrid(
     onObjectClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-
     LazyVerticalGrid(
         columns = GridCells.Adaptive(180.dp),
         // TODO simplify padding after https://issuetracker.google.com/issues/365052672 is fixed
