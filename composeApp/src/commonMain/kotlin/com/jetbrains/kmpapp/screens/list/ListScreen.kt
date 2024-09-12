@@ -70,15 +70,10 @@ private fun ObjectGrid(
     LazyVerticalGrid(
         columns = GridCells.Adaptive(180.dp),
         // TODO simplify padding after https://issuetracker.google.com/issues/365052672 is fixed
-        modifier = modifier.fillMaxSize()
-            .padding(
-                WindowInsets.safeDrawing
-                    .only(WindowInsetsSides.Start + WindowInsetsSides.End)
-                    .asPaddingValues()
-            ),
-        contentPadding = WindowInsets.safeDrawing
-            .only(WindowInsetsSides.Bottom + WindowInsetsSides.Top)
-            .asPaddingValues(),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal).asPaddingValues()),
+        contentPadding = WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical).asPaddingValues(),
     ) {
         items(objects, key = { it.objectID }) { obj ->
             ObjectFrame(
