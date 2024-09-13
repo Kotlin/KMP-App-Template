@@ -6,7 +6,7 @@ dependencies:
   - $libs.androidx.activity.compose
   - $compose.foundation
 
-settings: 
+settings:
   compose: enabled
   android:
     applicationId: com.jetbrains.kmpapp
