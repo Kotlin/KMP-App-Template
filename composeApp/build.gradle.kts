@@ -51,8 +51,8 @@ kotlin {
 
             implementation(libs.kamel)
             implementation(libs.koin.core)
-            implementation(libs.voyager.navigator)
-            implementation(libs.voyager.koin)
+            implementation(libs.koin.compose.viewmodel)
+            implementation(libs.navigation.compose)
         }
     }
 }

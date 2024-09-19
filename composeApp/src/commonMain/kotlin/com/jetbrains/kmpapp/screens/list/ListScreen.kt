@@ -28,35 +28,30 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
+import androidx.navigation.NavController
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
-import com.jetbrains.kmpapp.screens.detail.DetailScreen
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import org.koin.compose.viewmodel.koinViewModel
 
-data object ListScreen : Screen {
-    @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
-        val screenModel: ListScreenModel = getScreenModel()
+@Composable
+fun ListScreen(
+    navController: NavController,
+) {
+    val viewModel = koinViewModel<ListViewModel>()
+    val objects by viewModel.objects.collectAsState()
 
-        val objects by screenModel.objects.collectAsState()
-
-        AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
-            if (objectsAvailable) {
-                ObjectGrid(
-                    objects = objects,
-                    onObjectClick = { objectId ->
-                        navigator.push(DetailScreen(objectId))
-                    }
-                )
-            } else {
-                EmptyScreenContent(Modifier.fillMaxSize())
-            }
+    AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
+        if (objectsAvailable) {
+            ObjectGrid(
+                objects = objects,
+                onObjectClick = { objectId ->
+                    navController.navigate("detail/$objectId")
+                }
+            )
+        } else {
+            EmptyScreenContent(Modifier.fillMaxSize())
         }
     }
 }
