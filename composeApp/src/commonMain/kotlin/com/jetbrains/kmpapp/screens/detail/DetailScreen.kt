@@ -33,7 +33,6 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
 import io.kamel.image.KamelImage
@@ -53,15 +52,15 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun DetailScreen(
-    navController: NavController,
     objectId: Int,
+    navigateBack: () -> Unit,
 ) {
     val viewModel = koinViewModel<DetailViewModel>()
 
     val obj by viewModel.getObject(objectId).collectAsState(initial = null)
     AnimatedContent(obj != null) { objectAvailable ->
         if (objectAvailable) {
-            ObjectDetails(obj!!, onBackClick = { navController.navigateUp() })
+            ObjectDetails(obj!!, onBackClick = navigateBack)
         } else {
             EmptyScreenContent(Modifier.fillMaxSize())
         }

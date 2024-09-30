@@ -1,13 +1,13 @@
 [versions]
 agp = "8.6.0"
 androidx-activityCompose = "1.9.2"
-androidx-ui-tooling = "1.7.0"
+androidx-ui-tooling = "1.7.2"
 compose-multiplatform = "1.6.11"
 kamel = "0.9.5"
 koin = "4.0.0"
 kotlin = "2.0.20"
 ktor = "2.3.12"
-navigationCompose = "2.7.0-alpha07"
+navigationCompose = "2.8.0-alpha10"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }

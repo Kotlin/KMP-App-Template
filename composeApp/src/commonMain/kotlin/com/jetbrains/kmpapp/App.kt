@@ -10,8 +10,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.jetbrains.kmpapp.screens.detail.DetailScreen
 import com.jetbrains.kmpapp.screens.list.ListScreen
+import kotlinx.serialization.Serializable
+
+@Serializable
+object ListDestination
+
+@Serializable
+data class DetailDestination(val objectId: Int)
 
 @Composable
 fun App() {
@@ -20,16 +28,19 @@ fun App() {
     ) {
         Surface {
             val navController: NavHostController = rememberNavController()
-            NavHost(
-                navController,
-                startDestination = "list"
-            ) {
-                composable("list") {
-                    ListScreen(navController)
+            NavHost(navController = navController, startDestination = ListDestination) {
+                composable<ListDestination> {
+                    ListScreen(navigateToDetails = { objectId ->
+                        navController.navigate(DetailDestination(objectId))
+                    })
                 }
-                composable("detail/{objectId}") { backStackEntry ->
-                    val objectId = backStackEntry.arguments?.getString("objectId")?.toInt()
-                    DetailScreen(navController, objectId!!)
+                composable<DetailDestination> { backStackEntry ->
+                    DetailScreen(
+                        objectId = backStackEntry.toRoute<DetailDestination>().objectId,
+                        navigateBack = {
+                            navController.popBackStack()
+                        }
+                    )
                 }
             }
         }
