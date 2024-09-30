@@ -28,16 +28,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
+import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
+
+@Serializable
+object ListDestination
 
 @Composable
 fun ListScreen(
-    navController: NavController,
+    navigateToDetails: (objectId: Int) -> Unit
 ) {
     val viewModel = koinViewModel<ListViewModel>()
     val objects by viewModel.objects.collectAsState()
@@ -46,9 +49,7 @@ fun ListScreen(
         if (objectsAvailable) {
             ObjectGrid(
                 objects = objects,
-                onObjectClick = { objectId ->
-                    navController.navigate("detail/$objectId")
-                }
+                onObjectClick = navigateToDetails,
             )
         } else {
             EmptyScreenContent(Modifier.fillMaxSize())
@@ -68,7 +69,8 @@ private fun ObjectGrid(
         modifier = modifier
             .fillMaxSize()
             .padding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal).asPaddingValues()),
-        contentPadding = WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical).asPaddingValues(),
+        contentPadding = WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical)
+            .asPaddingValues(),
     ) {
         items(objects, key = { it.objectID }) { obj ->
             ObjectFrame(
@@ -102,7 +104,10 @@ private fun ObjectFrame(
 
         Spacer(Modifier.height(2.dp))
 
-        Text(obj.title, style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Bold))
+        Text(
+            obj.title,
+            style = MaterialTheme.typography.subtitle1.copy(fontWeight = FontWeight.Bold)
+        )
         Text(obj.artistDisplayName, style = MaterialTheme.typography.body2)
         Text(obj.objectDate, style = MaterialTheme.typography.caption)
     }
