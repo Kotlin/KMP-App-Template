@@ -47,12 +47,8 @@ import kmp_app_template.composeapp.generated.resources.label_dimensions
 import kmp_app_template.composeapp.generated.resources.label_medium
 import kmp_app_template.composeapp.generated.resources.label_repository
 import kmp_app_template.composeapp.generated.resources.label_title
-import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
-
-@Serializable
-data class DetailDestination(val objectId: Int)
 
 @Composable
 fun DetailScreen(

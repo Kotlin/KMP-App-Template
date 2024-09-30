@@ -32,11 +32,7 @@ import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
 import io.kamel.image.KamelImage
 import io.kamel.image.asyncPainterResource
-import kotlinx.serialization.Serializable
 import org.koin.compose.viewmodel.koinViewModel
-
-@Serializable
-object ListDestination
 
 @Composable
 fun ListScreen(

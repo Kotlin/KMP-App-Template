@@ -11,10 +11,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.jetbrains.kmpapp.screens.detail.DetailDestination
 import com.jetbrains.kmpapp.screens.detail.DetailScreen
-import com.jetbrains.kmpapp.screens.list.ListDestination
 import com.jetbrains.kmpapp.screens.list.ListScreen
+import kotlinx.serialization.Serializable
+
+@Serializable
+object ListDestination
+
+@Serializable
+data class DetailDestination(val objectId: Int)
 
 @Composable
 fun App() {
