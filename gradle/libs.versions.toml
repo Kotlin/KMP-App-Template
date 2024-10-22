@@ -1,19 +1,20 @@
 [versions]
-agp = "8.6.0"
-androidx-activityCompose = "1.9.2"
-androidx-ui-tooling = "1.7.2"
-compose-multiplatform = "1.6.11"
-kamel = "0.9.5"
+agp = "8.6.1"
+androidx-activityCompose = "1.9.3"
+androidx-ui-tooling = "1.7.4"
+coil = "3.0.0-rc01"
+compose-multiplatform = "1.7.0"
 koin = "4.0.0"
-kotlin = "2.0.20"
-ktor = "2.3.12"
+kotlin = "2.0.21"
+ktor = "3.0.0"
 navigationCompose = "2.8.0-alpha10"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidx-ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidx-ui-tooling" }
-kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
+coil-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil" }
+coil-network-ktor = { group = "io.coil-kt.coil3", name = "coil-network-ktor3", version.ref = "coil" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
