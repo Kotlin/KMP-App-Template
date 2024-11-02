@@ -40,12 +40,3 @@ val viewModelModule = module {
     factoryOf(::ListViewModel)
     factoryOf(::DetailViewModel)
 }
-
-fun initKoin() {
-    startKoin {
-        modules(
-            dataModule,
-            viewModelModule,
-        )
-    }
-}
