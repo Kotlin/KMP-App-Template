@@ -67,7 +67,6 @@ fun DetailScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ObjectDetails(
     obj: MuseumObject,
@@ -76,6 +75,7 @@ private fun ObjectDetails(
 ) {
     Scaffold(
         topBar = {
+            @OptIn(ExperimentalMaterial3Api::class)
             TopAppBar(
                 title = { Text("") },
                 modifier = Modifier.background(color = MaterialTheme.colorScheme.background),
