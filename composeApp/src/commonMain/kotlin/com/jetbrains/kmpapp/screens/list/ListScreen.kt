@@ -26,7 +26,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.jetbrains.kmpapp.data.MuseumObject
@@ -99,10 +98,7 @@ private fun ObjectFrame(
 
         Spacer(Modifier.height(2.dp))
 
-        Text(
-            obj.title,
-            style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
-        )
+        Text(obj.title, style = MaterialTheme.typography.titleMedium)
         Text(obj.artistDisplayName, style = MaterialTheme.typography.bodyMedium)
         Text(obj.objectDate, style = MaterialTheme.typography.bodySmall)
     }
