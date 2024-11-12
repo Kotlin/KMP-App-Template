@@ -78,7 +78,6 @@ private fun ObjectDetails(
             @OptIn(ExperimentalMaterial3Api::class)
             TopAppBar(
                 title = {},
-                modifier = Modifier.background(color = MaterialTheme.colorScheme.background),
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
