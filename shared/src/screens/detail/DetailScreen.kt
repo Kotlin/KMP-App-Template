@@ -38,10 +38,9 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import coil3.compose.AsyncImage
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
-import io.kamel.image.KamelImage
-import io.kamel.image.asyncPainterResource
 
 data class DetailScreen(val objectId: Int) : Screen {
     @Composable
@@ -85,8 +84,8 @@ private fun ObjectDetails(
                 .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
         ) {
-            KamelImage(
-                resource = asyncPainterResource(data = obj.primaryImageSmall),
+            AsyncImage(
+                model = obj.primaryImageSmall,
                 contentDescription = obj.title,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
