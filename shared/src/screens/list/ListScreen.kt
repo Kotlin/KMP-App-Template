@@ -21,12 +21,12 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -43,7 +43,7 @@ data object ListScreen : Screen {
         val navigator = LocalNavigator.currentOrThrow
         val screenModel: ListScreenModel = getScreenModel()
 
-        val objects by screenModel.objects.collectAsState()
+        val objects by screenModel.objects.collectAsStateWithLifecycle()
 
         AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
             if (objectsAvailable) {

@@ -24,7 +24,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,6 +33,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -49,7 +49,7 @@ data class DetailScreen(val objectId: Int) : Screen {
         val navigator = LocalNavigator.currentOrThrow
         val screenModel: DetailScreenModel = getScreenModel()
 
-        val obj by screenModel.getObject(objectId).collectAsState(initial = null)
+        val obj by screenModel.getObject(objectId).collectAsStateWithLifecycle(initialValue = null)
         AnimatedContent(obj != null) { objectAvailable ->
             if (objectAvailable) {
                 ObjectDetails(obj!!, onBackClick = { navigator.pop() })
