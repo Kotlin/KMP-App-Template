@@ -1,6 +1,7 @@
 [versions]
 androidx-activityCompose = "1.9.2"
 androidx-ui-tooling = "1.7.0"
+androidx-lifecycle = "2.8.4"
 coroutines = "1.8.1"
 kamel = "0.9.5"
 koin = "3.5.6"
@@ -10,6 +11,7 @@ voyager = "1.0.0"
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidx-ui-tooling" }
+androidx-lifecycle-runtime-compose = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
 kamel = { module = "media.kamel:kamel-image", version.ref = "kamel" }
 kotlinx-coroutines-swing = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", version.ref = "coroutines" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
