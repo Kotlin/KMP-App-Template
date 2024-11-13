@@ -31,11 +31,10 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.getScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import coil3.compose.AsyncImage
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
 import com.jetbrains.kmpapp.screens.detail.DetailScreen
-import io.kamel.image.KamelImage
-import io.kamel.image.asyncPainterResource
 
 data object ListScreen : Screen {
     @Composable
@@ -94,8 +93,8 @@ private fun ObjectFrame(
             .padding(8.dp)
             .clickable { onClick() }
     ) {
-        KamelImage(
-            resource = asyncPainterResource(data = obj.primaryImageSmall),
+        AsyncImage(
+            model = obj.primaryImageSmall,
             contentDescription = obj.title,
             contentScale = ContentScale.Crop,
             modifier = Modifier

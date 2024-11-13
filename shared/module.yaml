@@ -10,7 +10,8 @@ dependencies:
   - $libs.ktor.client.core
   - $libs.ktor.client.content.negotiation
   - $libs.ktor.serialization.kotlinx.json
-  - $libs.kamel
+  - $libs.coil.compose
+  - $libs.coil.network.ktor
   - $libs.koin.core
   - $libs.voyager.navigator
   - $libs.voyager.koin
