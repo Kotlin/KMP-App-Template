@@ -5,7 +5,7 @@ product:
 dependencies: 
   - $compose.runtime
   - $compose.foundation
-  - $compose.material
+  - $compose.material3
   - $libs.ktor.client.core
   - $libs.ktor.client.content.negotiation
   - $libs.ktor.serialization.kotlinx.json
