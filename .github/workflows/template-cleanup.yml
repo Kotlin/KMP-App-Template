@@ -22,6 +22,8 @@ jobs:
 
       - name: Cleanup
         run: |
+          mv .github/README.md README.md
+          rm LICENSE
           rm -rf .github
 
       - name: Commit files
