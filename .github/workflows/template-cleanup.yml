@@ -22,7 +22,7 @@ jobs:
 
       - name: Cleanup
         run: |
-          mv .github/README.md README.md
+          mv .github/CLEAN_README.md README.md
           rm LICENSE
           rm -rf .github
 
