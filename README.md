@@ -1,27 +1,73 @@
-# Kotlin Multiplatform app template
+This is a Kotlin Multiplatform project targeting Android, iOS, Web, Desktop, Server.
 
-[![official project](http://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
+  It contains several subfolders:
+    - `commonMain` is for code that’s common for all targets.
+    - `iosMain` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform,
+      you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+    - `desktopMain` contains desktop applications that works on Windows, MacOS and Linux.
+    - `wasmMain` contains web applications that works on Chrome (not tested on other browsers).
 
-This is a basic Kotlin Multiplatform app template for Android and iOS. It includes shared business logic and data handling, and a shared UI implementation using Compose Multiplatform.
+* `/server` is for the Ktor server application.
 
-> The template is also available [with native UI written in Jetpack Compose and SwiftUI](https://github.com/kotlin/KMP-App-Template-Native).
->
-> The [`amper` branch](https://github.com/Kotlin/KMP-App-Template/tree/amper) showcases the same project configured with [Amper](https://github.com/JetBrains/amper).
+* `/shared` is for the code that will be shared between all targets in the project.
 
-![Screenshots of the app](images/screenshots.png)
+Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html),
+[Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform/#compose-multiplatform),
+[Kotlin/Wasm](https://kotl.in/wasm/)…
 
-### Technologies
+You can open the web application by running the Gradle task below:
+```bash
+./gradlew :composeApp:wasmJsBrowserDevelopmentRun
+```
 
-The data displayed by the app is from [The Metropolitan Museum of Art Collection API](https://metmuseum.github.io/).
+The KMP template tries to help you get started with these points:
 
-The app uses the following multiplatform dependencies in its implementation:
+- [ ] Core
+    - [ ] Logging: [Napier](https://github.com/AAkira/Napier)?
+      - [ ] Error reporting
+      - [ ] Analytics
+      - [ ] Tracing
+    - [ ] Network: [ktor](https://ktor.io/)
+    - [ ] Benchmarking
+    - [ ] Build conventions
+    - [ ] Flavours
+    - [ ] Mocks
+    - [ ] Test fixtures
+    - [ ] Build info
+    - [ ] Preferences
+    - [ ] Storage
+    - [ ] DI: koin?
+    - [ ] Feature flags (local & remote)
+    - [ ] Deep linking
+    - [ ] Push notifications
+    - [ ] TimeProvider
+    - [ ] Local Formatters
+    - [ ] Coroutine Dispatchers
+    - [ ] Coroutine Dispatchers Test helper
+    - [ ] Lint
+    - [ ] Static code analysis
+    - [ ] Unit testing
+    - [ ] Test coverage: Jacoco?
+    - [ ] Obfuscation & Shrinking
+    - [ ] Pipelines
+    - [ ] Releasing
+    - [ ] Force updates
+    - [ ] Dependency management: Renovate?
 
-- [Compose Multiplatform](https://jb.gg/compose) for UI
-- [Compose Navigation](https://www.jetbrains.com/help/kotlin-multiplatform-dev/compose-navigation-routing.html)
-- [Ktor](https://ktor.io/) for networking
-- [kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization) for JSON handling
-- [Coil](https://github.com/coil-kt/coil) for image loading
-- [Koin](https://github.com/InsertKoinIO/koin) for dependency injection
-
-> These are just some of the possible libraries to use for these tasks with Kotlin Multiplatform, and their usage here isn't a strong recommendation for these specific libraries over the available alternatives. You can find a wide variety of curated multiplatform libraries in the [kmp-awesome](https://github.com/terrakok/kmp-awesome) repository.
+- [ ] UI
+    - [ ] Design system
+    - [ ] Gallery App
+    - [ ] Navigation
+    - [ ] Baseline profiles
+    - [ ] Compose compiler metrics
+    - [ ] Previews
+    - [ ] Network image loading: coil
+    - [ ] supportsDynamicTheming
+    - [ ] Status bar color changing
+    - [ ] App settings with Resource Environment (See: [Source 1](https://github.com/JetBrains/compose-multiplatform/pull/5239), [Source 2](https://github.com/JetBrains/compose-multiplatform/blob/master/components/resources/library/src/androidMain/kotlin/org/jetbrains/compose/resources/ResourceEnvironment.android.kt), [Source 3](https://youtrack.jetbrains.com/issue/CMP-4197) )
+        - [ ] l10n
+        - [ ] i18n
+    - [ ] Testing
+        - [ ] UI Testing
+        - [ ] Compose Screenshot testing

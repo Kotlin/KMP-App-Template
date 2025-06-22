@@ -13,7 +13,7 @@ jobs:
   template-cleanup:
     name: Template Cleanup  
     runs-on: ubuntu-latest
-    if: github.event.repository.name != 'KMP-App-Template' || github.repository_owner != 'Kotlin'
+    if: github.event.repository.name != 'KMP-Template' || github.repository_owner != 'melomg'
     permissions:
       contents: write
     steps:
@@ -24,6 +24,7 @@ jobs:
         run: |
           mv .github/CLEAN_README.md README.md
           rm LICENSE
+          rm images
           rm -rf .github
 
       - name: Commit files
