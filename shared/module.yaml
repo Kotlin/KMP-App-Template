@@ -12,6 +12,7 @@ dependencies:
   - $libs.ktor.serialization.kotlinx.json
   - $libs.kamel
   - $libs.koin.core
+  - $libs.material.icons.core
   - $libs.voyager.navigator
   - $libs.voyager.koin
 
