@@ -1,11 +1,12 @@
 [versions]
 androidx-activityCompose = "1.9.2"
-androidx-ui-tooling = "1.7.0"
+androidx-ui-tooling = "1.8.2"
 androidx-lifecycle = "2.8.4"
 coroutines = "1.8.1"
 kamel = "0.9.5"
 koin = "3.5.6"
 ktor = "2.3.12"
+materialIconsCore = "1.7.3"
 voyager = "1.0.0"
 
 [libraries]
@@ -20,5 +21,6 @@ ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+material-icons-core = { module = "org.jetbrains.compose.material:material-icons-core", version.ref = "materialIconsCore" }
 voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
 voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
