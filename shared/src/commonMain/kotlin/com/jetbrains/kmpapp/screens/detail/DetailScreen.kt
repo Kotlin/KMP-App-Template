@@ -37,16 +37,16 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
-import kmp_app_template.composeapp.generated.resources.Res
-import kmp_app_template.composeapp.generated.resources.back
-import kmp_app_template.composeapp.generated.resources.label_artist
-import kmp_app_template.composeapp.generated.resources.label_credits
-import kmp_app_template.composeapp.generated.resources.label_date
-import kmp_app_template.composeapp.generated.resources.label_department
-import kmp_app_template.composeapp.generated.resources.label_dimensions
-import kmp_app_template.composeapp.generated.resources.label_medium
-import kmp_app_template.composeapp.generated.resources.label_repository
-import kmp_app_template.composeapp.generated.resources.label_title
+import kmp_app_template.shared.generated.resources.Res
+import kmp_app_template.shared.generated.resources.back
+import kmp_app_template.shared.generated.resources.label_artist
+import kmp_app_template.shared.generated.resources.label_credits
+import kmp_app_template.shared.generated.resources.label_date
+import kmp_app_template.shared.generated.resources.label_department
+import kmp_app_template.shared.generated.resources.label_dimensions
+import kmp_app_template.shared.generated.resources.label_medium
+import kmp_app_template.shared.generated.resources.label_repository
+import kmp_app_template.shared.generated.resources.label_title
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 
