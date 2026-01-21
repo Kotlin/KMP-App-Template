@@ -1,16 +1,17 @@
 package com.jetbrains.kmpapp
 
 import android.app.Application
-import com.jetbrains.kmpapp.di.AppGraph
-import dev.zacsweers.metro.createGraph
+import com.jetbrains.kmpapp.data.MuseumRepository
+import com.jetbrains.kmpapp.di.KoinApp
+import org.koin.plugin.module.dsl.startKoin
 
 class MuseumApp : Application() {
-    val appGraph: AppGraph by lazy {
-        createGraph<AppGraph>()
+    val koin by lazy {
+        startKoin<KoinApp>().koin
     }
 
     override fun onCreate() {
         super.onCreate()
-        appGraph.museumRepository.initialize()
+        koin.get<MuseumRepository>().initialize()
     }
 }

@@ -28,13 +28,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
-import dev.zacsweers.metrox.viewmodel.metroViewModel
+import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun ListScreen(
     navigateToDetails: (objectId: Int) -> Unit
 ) {
-    val viewModel = metroViewModel<ListViewModel>()
+    val viewModel = koinViewModel<ListViewModel>()
     val objects by viewModel.objects.collectAsStateWithLifecycle()
 
     AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->

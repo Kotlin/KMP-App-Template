@@ -1,11 +1,9 @@
 package com.jetbrains.kmpapp.data
 
-import dev.zacsweers.metro.AppScope
-import dev.zacsweers.metro.ContributesBinding
-import dev.zacsweers.metro.SingleIn
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
+import org.koin.core.annotation.Singleton
 
 interface MuseumStorage {
     suspend fun saveObjects(newObjects: List<MuseumObject>)
@@ -15,8 +13,7 @@ interface MuseumStorage {
     fun getObjects(): Flow<List<MuseumObject>>
 }
 
-@SingleIn(AppScope::class)
-@ContributesBinding(AppScope::class)
+@Singleton
 class InMemoryMuseumStorage : MuseumStorage {
     private val storedObjects = MutableStateFlow(emptyList<MuseumObject>())
 
