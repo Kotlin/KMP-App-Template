@@ -57,6 +57,7 @@ kotlin {
             implementation(libs.coil.compose)
             implementation(libs.coil.network.ktor)
             implementation(libs.koin.compose.viewmodel)
+            implementation(libs.koin.annotations)
         }
     }
 }
