@@ -13,39 +13,38 @@ import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import org.koin.core.context.startKoin
-import org.koin.core.module.dsl.factoryOf
+import org.koin.dsl.bind
 import org.koin.dsl.module
+import org.koin.plugin.module.dsl.create
+import org.koin.plugin.module.dsl.single
+import org.koin.plugin.module.dsl.viewModel
 
 val dataModule = module {
-    single {
-        val json = Json { ignoreUnknownKeys = true }
-        HttpClient {
-            install(ContentNegotiation) {
-                // TODO Fix API so it serves application/json
-                json(json, contentType = ContentType.Any)
-            }
-        }
-    }
+    single { create(::buildHttpClient) }
+    single<KtorMuseumApi>() bind MuseumApi::class
+    single<InMemoryMuseumStorage>() bind MuseumStorage::class
+    single<MuseumRepository>()
+}
 
-    single<MuseumApi> { KtorMuseumApi(get()) }
-    single<MuseumStorage> { InMemoryMuseumStorage() }
-    single {
-        MuseumRepository(get(), get()).apply {
-            initialize()
+fun buildHttpClient(): HttpClient {
+    val json = Json { ignoreUnknownKeys = true }
+    return HttpClient {
+        install(ContentNegotiation) {
+            // TODO Fix API so it serves application/json
+            json(json, contentType = ContentType.Any)
         }
     }
 }
 
 val viewModelModule = module {
-    factoryOf(::ListViewModel)
-    factoryOf(::DetailViewModel)
+    viewModel<ListViewModel>()
+    viewModel<DetailViewModel>()
 }
+
+val appModule = module { includes(dataModule,viewModelModule) }
 
 fun initKoin() {
     startKoin {
-        modules(
-            dataModule,
-            viewModelModule,
-        )
+        modules(appModule)
     }
 }
