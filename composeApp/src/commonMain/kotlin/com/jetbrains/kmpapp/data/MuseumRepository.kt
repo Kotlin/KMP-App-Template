@@ -11,6 +11,11 @@ class MuseumRepository(
 ) {
     private val scope = CoroutineScope(SupervisorJob())
 
+    // To see where we call this if not in constructor
+    init {
+        initialize()
+    }
+
     fun initialize() {
         scope.launch {
             refresh()
