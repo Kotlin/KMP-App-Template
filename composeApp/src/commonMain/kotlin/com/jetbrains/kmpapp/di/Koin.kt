@@ -35,11 +35,31 @@ import org.koin.plugin.module.dsl.startKoin
 //class AppModule
 
 // --- 1 module version ---
+/**
+ * Main Koin dependency injection module for the application.
+ *
+ * This module is responsible for providing all dependencies used throughout the app.
+ * It uses Koin's annotation-based configuration with:
+ * - [@Module][Module]: Marks this class as a Koin module
+ * - [@ComponentScan][ComponentScan]: Automatically scans and registers all annotated components
+ *   under the `com.jetbrains.kmpapp` package
+ * - [@Configuration][Configuration]: Indicates this is the root configuration module
+ */
 @Module
 @ComponentScan("com.jetbrains.kmpapp")
 @Configuration
 class AppModule {
 
+    /**
+     * Provides a configured [HttpClient] instance as a singleton.
+     *
+     * The client is configured with:
+     * - JSON serialization using kotlinx.serialization
+     * - `ignoreUnknownKeys = true` to gracefully handle API responses with extra fields
+     * - Content negotiation set to accept any content type (workaround for API not serving `application/json`)
+     *
+     * @return A configured [HttpClient] instance for making network requests
+     */
     @Singleton
     fun httpClient(): HttpClient {
         val json = Json { ignoreUnknownKeys = true }
@@ -52,9 +72,24 @@ class AppModule {
     }
 }
 
+/**
+ * Koin application entry point.
+ *
+ * This object is annotated with [@KoinApplication][KoinApplication] to generate
+ * the necessary Koin startup code at compile time using KSP (Kotlin Symbol Processing).
+ */
 @KoinApplication
 object KoinApp
 
+/**
+ * Initializes the Koin dependency injection framework.
+ *
+ * This function should be called once at application startup (typically in the
+ * platform-specific entry point) to set up all dependency injection bindings.
+ *
+ * @see KoinApp
+ * @see AppModule
+ */
 fun initKoin() {
     startKoin<KoinApp>()
 }

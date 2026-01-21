@@ -10,6 +10,10 @@ interface MuseumApi {
     suspend fun getData(): List<MuseumObject>
 }
 
+/**
+ * Ktor-based implementation of [MuseumApi] for fetching museum data from remote API.
+ * Injected as singleton via @Singleton annotation.
+ */
 @Singleton
 class KtorMuseumApi(private val client: HttpClient) : MuseumApi {
     companion object {

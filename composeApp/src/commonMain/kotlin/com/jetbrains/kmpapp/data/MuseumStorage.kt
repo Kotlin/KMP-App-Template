@@ -13,6 +13,10 @@ interface MuseumStorage {
     fun getObjects(): Flow<List<MuseumObject>>
 }
 
+/**
+ * In-memory implementation of [MuseumStorage] for caching museum objects.
+ * Injected as singleton via @Singleton annotation.
+ */
 @Singleton
 class InMemoryMuseumStorage : MuseumStorage {
     private val storedObjects = MutableStateFlow(emptyList<MuseumObject>())
