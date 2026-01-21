@@ -7,7 +7,9 @@ import com.jetbrains.kmpapp.data.MuseumRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
+import org.koin.core.annotation.KoinViewModel
 
+@KoinViewModel
 class ListViewModel(museumRepository: MuseumRepository) : ViewModel() {
     val objects: StateFlow<List<MuseumObject>> =
         museumRepository.getObjects()

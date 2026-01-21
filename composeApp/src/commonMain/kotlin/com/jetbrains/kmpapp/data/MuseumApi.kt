@@ -4,11 +4,13 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.utils.io.CancellationException
+import org.koin.core.annotation.Singleton
 
 interface MuseumApi {
     suspend fun getData(): List<MuseumObject>
 }
 
+@Singleton
 class KtorMuseumApi(private val client: HttpClient) : MuseumApi {
     companion object {
         private const val API_URL =
