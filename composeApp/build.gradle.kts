@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
@@ -62,15 +62,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.jetbrains.kmpapp"
+    namespace = "com.jetbrains.kmpapp.shared"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.jetbrains.kmpapp"
         minSdk = 24
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
     }
     packaging {
         resources {

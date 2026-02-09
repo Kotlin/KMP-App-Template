@@ -1,5 +1,5 @@
 [versions]
-agp = "8.9.3"
+agp = "9.0.0"
 androidx-activityCompose = "1.12.3"
 androidx-ui-tooling = "1.10.2"
 coil = "3.3.0"
@@ -37,6 +37,8 @@ navigation-compose = { module = "org.jetbrains.androidx.navigation:navigation-co
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+androidBuiltInKotlin = { id = "com.android.built-in-kotlin", version.ref = "agp" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
