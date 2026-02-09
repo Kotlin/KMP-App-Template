@@ -3,18 +3,24 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.androidKmpLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
-    androidTarget {
+    androidLibrary {
         @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
+
+        namespace = "com.jetbrains.kmpapp.shared"
+        compileSdk = 36
+        minSdk = 24
+
+        androidResources.enable = true
     }
 
     listOf(
@@ -61,29 +67,6 @@ kotlin {
     }
 }
 
-android {
-    namespace = "com.jetbrains.kmpapp.shared"
-    compileSdk = 36
-
-    defaultConfig {
-        minSdk = 24
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-}
-
 dependencies {
-    debugImplementation(libs.androidx.compose.ui.tooling)
+    androidRuntimeClasspath(libs.androidx.compose.ui.tooling)
 }
