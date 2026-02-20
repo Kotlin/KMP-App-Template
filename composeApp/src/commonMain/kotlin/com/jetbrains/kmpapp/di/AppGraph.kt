@@ -1,11 +1,7 @@
 package com.jetbrains.kmpapp.di
 
 import androidx.lifecycle.ViewModel
-import com.jetbrains.kmpapp.data.InMemoryMuseumStorage
-import com.jetbrains.kmpapp.data.KtorMuseumApi
-import com.jetbrains.kmpapp.data.MuseumApi
 import com.jetbrains.kmpapp.data.MuseumRepository
-import com.jetbrains.kmpapp.data.MuseumStorage
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.DependencyGraph
 import dev.zacsweers.metro.Provider
@@ -46,17 +42,4 @@ interface AppGraph : ViewModelGraph {
             json(json, contentType = ContentType.Any)
         }
     }
-
-    @Provides
-    @SingleIn(AppScope::class)
-    fun provideMuseumApi(client: HttpClient): MuseumApi = KtorMuseumApi(client)
-
-    @Provides
-    @SingleIn(AppScope::class)
-    fun provideMuseumStorage(): MuseumStorage = InMemoryMuseumStorage()
-
-    @Provides
-    @SingleIn(AppScope::class)
-    fun provideMuseumRepository(api: MuseumApi, storage: MuseumStorage): MuseumRepository =
-        MuseumRepository(api, storage)
 }
