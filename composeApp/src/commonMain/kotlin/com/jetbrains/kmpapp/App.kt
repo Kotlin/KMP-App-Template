@@ -7,7 +7,6 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -25,14 +24,9 @@ object ListDestination
 @Serializable
 data class DetailDestination(val objectId: Int)
 
-val LocalAppGraph = staticCompositionLocalOf<AppGraph> {
-    error("No AppGraph provided")
-}
-
 @Composable
 fun App(appGraph: AppGraph) {
     CompositionLocalProvider(
-        LocalAppGraph provides appGraph,
         LocalMetroViewModelFactory provides appGraph.metroViewModelFactory,
     ) {
         MaterialTheme(
