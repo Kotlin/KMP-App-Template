@@ -6,20 +6,25 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.saveable.rememberSerializable
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.navigation3.ui.NavDisplay
+import androidx.savedstate.compose.serialization.serializers.SnapshotStateListSerializer
 import com.jetbrains.kmpapp.screens.detail.DetailScreen
 import com.jetbrains.kmpapp.screens.list.ListScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
-object ListDestination
+sealed interface Route
 
 @Serializable
-data class DetailDestination(val objectId: Int)
+data object ListRoute : Route
+
+@Serializable
+data class DetailRoute(val objectId: Int) : Route
 
 @Composable
 fun App() {
@@ -27,22 +32,32 @@ fun App() {
         colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()
     ) {
         Surface {
-            val navController: NavHostController = rememberNavController()
-            NavHost(navController = navController, startDestination = ListDestination) {
-                composable<ListDestination> {
-                    ListScreen(navigateToDetails = { objectId ->
-                        navController.navigate(DetailDestination(objectId))
-                    })
-                }
-                composable<DetailDestination> { backStackEntry ->
-                    DetailScreen(
-                        objectId = backStackEntry.toRoute<DetailDestination>().objectId,
-                        navigateBack = {
-                            navController.popBackStack()
-                        }
-                    )
-                }
+            val backStack = rememberSerializable(serializer = SnapshotStateListSerializer()) {
+                mutableStateListOf<Route>(ListRoute)
             }
+
+            val onBack = { if (backStack.size > 1) backStack.removeLast() }
+            NavDisplay(
+                backStack = backStack,
+                onBack = onBack,
+                entryProvider = entryProvider {
+                    entry<ListRoute> {
+                        ListScreen(navigateToDetails = { objectId ->
+                            backStack.add(DetailRoute(objectId))
+                        })
+                    }
+                    entry<DetailRoute> { destination ->
+                        DetailScreen(
+                            objectId = destination.objectId,
+                            navigateBack = onBack,
+                        )
+                    }
+                },
+                entryDecorators = listOf(
+                    rememberSaveableStateHolderNavEntryDecorator(),
+                    rememberViewModelStoreNavEntryDecorator(),
+                ),
+            )
         }
     }
 }
