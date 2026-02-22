@@ -1,51 +1,95 @@
 package com.jetbrains.kmpapp.di
 
-import com.jetbrains.kmpapp.data.InMemoryMuseumStorage
-import com.jetbrains.kmpapp.data.KtorMuseumApi
-import com.jetbrains.kmpapp.data.MuseumApi
-import com.jetbrains.kmpapp.data.MuseumRepository
-import com.jetbrains.kmpapp.data.MuseumStorage
-import com.jetbrains.kmpapp.screens.detail.DetailViewModel
-import com.jetbrains.kmpapp.screens.list.ListViewModel
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import org.koin.core.context.startKoin
-import org.koin.core.module.dsl.factoryOf
-import org.koin.dsl.module
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Configuration
+import org.koin.core.annotation.KoinApplication
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Singleton
+import org.koin.plugin.module.dsl.startKoin
 
-val dataModule = module {
-    single {
+// --- 2 module version ---
+//@Module
+//@ComponentScan("com.jetbrains.kmpapp.data")
+//class DataModule {
+//
+//    @Singleton
+//    fun httpClient(): HttpClient {
+//        val json = Json { ignoreUnknownKeys = true }
+//        return HttpClient {
+//            install(ContentNegotiation) {
+//                // TODO Fix API so it serves application/json
+//                json(json, contentType = ContentType.Any)
+//            }
+//        }
+//    }
+//}
+//
+//@Module(includes = [DataModule::class])
+//@ComponentScan("com.jetbrains.kmpapp.screens")
+//@Configuration
+//class AppModule
+
+// --- 1 module version ---
+/**
+ * Main Koin dependency injection module for the application.
+ *
+ * This module is responsible for providing all dependencies used throughout the app.
+ * It uses Koin's annotation-based configuration with:
+ * - [@Module][Module]: Marks this class as a Koin module
+ * - [@ComponentScan][ComponentScan]: Automatically scans and registers all annotated components
+ *   under the `com.jetbrains.kmpapp` package
+ * - [@Configuration][Configuration]: Indicates this is the root configuration module
+ */
+@Module
+@ComponentScan("com.jetbrains.kmpapp")
+@Configuration
+class AppModule {
+
+    /**
+     * Provides a configured [HttpClient] instance as a singleton.
+     *
+     * The client is configured with:
+     * - JSON serialization using kotlinx.serialization
+     * - `ignoreUnknownKeys = true` to gracefully handle API responses with extra fields
+     * - Content negotiation set to accept any content type (workaround for API not serving `application/json`)
+     *
+     * @return A configured [HttpClient] instance for making network requests
+     */
+    @Singleton
+    fun httpClient(): HttpClient {
         val json = Json { ignoreUnknownKeys = true }
-        HttpClient {
+        return HttpClient {
             install(ContentNegotiation) {
                 // TODO Fix API so it serves application/json
                 json(json, contentType = ContentType.Any)
             }
         }
     }
-
-    single<MuseumApi> { KtorMuseumApi(get()) }
-    single<MuseumStorage> { InMemoryMuseumStorage() }
-    single {
-        MuseumRepository(get(), get()).apply {
-            initialize()
-        }
-    }
 }
 
-val viewModelModule = module {
-    factoryOf(::ListViewModel)
-    factoryOf(::DetailViewModel)
-}
+/**
+ * Koin application entry point.
+ *
+ * This object is annotated with [@KoinApplication][KoinApplication] to generate
+ * the necessary Koin startup code at compile time using KSP (Kotlin Symbol Processing).
+ */
+@KoinApplication
+object KoinApp
 
+/**
+ * Initializes the Koin dependency injection framework.
+ *
+ * This function should be called once at application startup (typically in the
+ * platform-specific entry point) to set up all dependency injection bindings.
+ *
+ * @see KoinApp
+ * @see AppModule
+ */
 fun initKoin() {
-    startKoin {
-        modules(
-            dataModule,
-            viewModelModule,
-        )
-    }
+    startKoin<KoinApp>()
 }
