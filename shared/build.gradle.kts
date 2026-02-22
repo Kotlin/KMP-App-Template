@@ -1,30 +1,15 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
-    alias(libs.plugins.androidKmpLibrary)
+    alias(libs.plugins.androidMultiplatformLibrary)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
-    androidLibrary {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
-
-        namespace = "com.jetbrains.kmpapp.shared"
-        compileSdk = 36
-        minSdk = 24
-
-        androidResources.enable = true
-    }
-
     listOf(
-        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach { iosTarget ->
@@ -34,9 +19,22 @@ kotlin {
         }
     }
 
+    androidLibrary {
+        namespace = "com.jetbrains.kmpapp.shared"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_11
+        }
+        androidResources {
+            enable = true
+        }
+    }
+
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.androidx.compose.ui.tooling.preview)
+            implementation(libs.compose.uiToolingPreview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
         }
@@ -49,10 +47,10 @@ kotlin {
             implementation(libs.compose.material3)
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
-            implementation(libs.compose.ui.tooling.preview)
+            implementation(libs.compose.uiToolingPreview)
 
             implementation(libs.navigation.compose)
-            implementation(libs.lifecycle.runtime.compose)
+            implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.compose.material.icons.core)
 
             implementation(libs.ktor.client.core)
@@ -68,5 +66,5 @@ kotlin {
 }
 
 dependencies {
-    androidRuntimeClasspath(libs.androidx.compose.ui.tooling)
+    androidRuntimeClasspath(libs.compose.uiTooling)
 }
