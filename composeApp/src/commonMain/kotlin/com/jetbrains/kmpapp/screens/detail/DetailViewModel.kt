@@ -9,7 +9,7 @@ import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import kotlinx.coroutines.flow.Flow
 
 @ContributesIntoMap(AppScope::class)
-@ViewModelKey(DetailViewModel::class)
+@ViewModelKey
 class DetailViewModel(private val museumRepository: MuseumRepository) : ViewModel() {
     fun getObject(objectId: Int): Flow<MuseumObject?> =
         museumRepository.getObjectById(objectId)
