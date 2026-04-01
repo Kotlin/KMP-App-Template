@@ -1,13 +1,10 @@
 package com.jetbrains.kmpapp
 
 import androidx.compose.ui.window.ComposeUIViewController
-import com.jetbrains.kmpapp.di.AppGraph
-import dev.zacsweers.metro.createGraph
+import com.jetbrains.kmpapp.di.KoinApp
+import org.koin.core.Koin
+import org.koin.plugin.module.dsl.startKoin
 
-private val appGraph: AppGraph by lazy {
-    createGraph<AppGraph>().also {
-        it.museumRepository.initialize()
-    }
-}
+private val koin: Koin = startKoin<KoinApp>().koin
 
-fun MainViewController() = ComposeUIViewController { App(appGraph) }
+fun MainViewController() = ComposeUIViewController { App() }

@@ -12,10 +12,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.jetbrains.kmpapp.di.AppGraph
 import com.jetbrains.kmpapp.screens.detail.DetailScreen
 import com.jetbrains.kmpapp.screens.list.ListScreen
-import dev.zacsweers.metrox.viewmodel.LocalMetroViewModelFactory
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -25,10 +23,7 @@ object ListDestination
 data class DetailDestination(val objectId: Int)
 
 @Composable
-fun App(appGraph: AppGraph) {
-    CompositionLocalProvider(
-        LocalMetroViewModelFactory provides appGraph.metroViewModelFactory,
-    ) {
+fun App() {
         MaterialTheme(
             colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()
         ) {
@@ -51,5 +46,4 @@ fun App(appGraph: AppGraph) {
                 }
             }
         }
-    }
 }
