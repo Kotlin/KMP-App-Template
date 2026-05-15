@@ -4,12 +4,23 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import org.koin.core.annotation.Singleton
 
+/**
+ * Repository for accessing and refreshing museum objects from API and storage.
+ * Injected as singleton via @Singleton annotation.
+ */
+@Singleton
 class MuseumRepository(
     private val museumApi: MuseumApi,
     private val museumStorage: MuseumStorage,
 ) {
     private val scope = CoroutineScope(SupervisorJob())
+
+    // To see where we call this if not in constructor
+    init {
+        initialize()
+    }
 
     fun initialize() {
         scope.launch {

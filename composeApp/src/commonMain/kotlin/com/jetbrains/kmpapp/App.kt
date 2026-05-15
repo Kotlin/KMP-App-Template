@@ -11,9 +11,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
+import com.jetbrains.kmpapp.di.KoinApp
 import com.jetbrains.kmpapp.screens.detail.DetailScreen
 import com.jetbrains.kmpapp.screens.list.ListScreen
 import kotlinx.serialization.Serializable
+import org.koin.compose.KoinApplication
+import org.koin.plugin.module.dsl.koinConfiguration
 
 @Serializable
 object ListDestination
@@ -23,24 +26,28 @@ data class DetailDestination(val objectId: Int)
 
 @Composable
 fun App() {
-    MaterialTheme(
-        colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()
-    ) {
-        Surface {
-            val navController: NavHostController = rememberNavController()
-            NavHost(navController = navController, startDestination = ListDestination) {
-                composable<ListDestination> {
-                    ListScreen(navigateToDetails = { objectId ->
-                        navController.navigate(DetailDestination(objectId))
-                    })
-                }
-                composable<DetailDestination> { backStackEntry ->
-                    DetailScreen(
-                        objectId = backStackEntry.toRoute<DetailDestination>().objectId,
-                        navigateBack = {
-                            navController.popBackStack()
-                        }
-                    )
+    // Initialize Koin DI using the generated configuration from KoinApp annotated entry point
+    // Configure Android Context automatically
+    KoinApplication(configuration = koinConfiguration<KoinApp>()){
+        MaterialTheme(
+            colorScheme = if (isSystemInDarkTheme()) darkColorScheme() else lightColorScheme()
+        ) {
+            Surface {
+                val navController: NavHostController = rememberNavController()
+                NavHost(navController = navController, startDestination = ListDestination) {
+                    composable<ListDestination> {
+                        ListScreen(navigateToDetails = { objectId ->
+                            navController.navigate(DetailDestination(objectId))
+                        })
+                    }
+                    composable<DetailDestination> { backStackEntry ->
+                        DetailScreen(
+                            objectId = backStackEntry.toRoute<DetailDestination>().objectId,
+                            navigateBack = {
+                                navController.popBackStack()
+                            }
+                        )
+                    }
                 }
             }
         }
