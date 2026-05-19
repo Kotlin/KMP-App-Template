@@ -3,11 +3,7 @@ product:
   platforms: [jvm, android, iosArm64, iosSimulatorArm64, iosX64]
 
 repositories:
-  - https://repo.spring.io/ui/native/release
-  - https://repo.maven.apache.org/maven2/
   - url: https://dl.google.com/dl/android/maven2/
-  - id: jitpack
-    url: https://jitpack.io
 
 dependencies: 
   - $compose.runtime
