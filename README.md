@@ -24,3 +24,14 @@ The app uses the following multiplatform dependencies in its implementation:
 - [Voyager](https://github.com/adrielcafe/voyager) for navigation and screen models
 
 > These are just some of the possible libraries to use for these tasks with Kotlin Multiplatform, and their usage here isn't a strong recommendation for these specific libraries over the available alternatives. You can find a wide variety of curated multiplatform libraries in the [kmp-awesome](https://github.com/terrakok/kmp-awesome) repository.
+
+### How to use this example ?
+
+**Tested on macOS Apple Silicon Ships**
+1. Run `./amper build`
+2. Then for :
+   - Android : `./amper run --platform android`
+   - iOS simulator : `./amper run --platform iosSimulatorArm64`
+   - iOS real device : `./amper run --platform iosArm64`
+
+Happy coding :)
