@@ -1,11 +1,11 @@
 package com.jetbrains.kmpapp.screens.detail
 
-import cafe.adriel.voyager.core.model.ScreenModel
+import androidx.lifecycle.ViewModel
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.data.MuseumRepository
 import kotlinx.coroutines.flow.Flow
 
-class DetailScreenModel(private val museumRepository: MuseumRepository) : ScreenModel {
+class DetailViewModel(private val museumRepository: MuseumRepository) : ViewModel() {
     fun getObject(objectId: Int): Flow<MuseumObject?> =
         museumRepository.getObjectById(objectId)
 }

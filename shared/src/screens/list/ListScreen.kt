@@ -6,13 +6,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -27,35 +25,26 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
+import coil3.compose.AsyncImage
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
-import com.jetbrains.kmpapp.screens.detail.DetailScreen
-import io.kamel.image.KamelImage
-import io.kamel.image.asyncPainterResource
+import org.koin.compose.viewmodel.koinViewModel
 
-data object ListScreen : Screen {
-    @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
-        val screenModel: ListScreenModel = getScreenModel()
+@Composable
+fun ListScreen(
+    navigateToDetails: (objectId: Int) -> Unit
+) {
+    val viewModel = koinViewModel<ListViewModel>()
+    val objects by viewModel.objects.collectAsStateWithLifecycle()
 
-        val objects by screenModel.objects.collectAsStateWithLifecycle()
-
-        AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
-            if (objectsAvailable) {
-                ObjectGrid(
-                    objects = objects,
-                    onObjectClick = { objectId ->
-                        navigator.push(DetailScreen(objectId))
-                    }
-                )
-            } else {
-                EmptyScreenContent(Modifier.fillMaxSize())
-            }
+    AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
+        if (objectsAvailable) {
+            ObjectGrid(
+                objects = objects,
+                onObjectClick = navigateToDetails,
+            )
+        } else {
+            EmptyScreenContent(Modifier.fillMaxSize())
         }
     }
 }
@@ -68,11 +57,8 @@ private fun ObjectGrid(
 ) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(180.dp),
-        // TODO simplify padding after https://issuetracker.google.com/issues/365052672 is fixed
-        modifier = modifier
-            .fillMaxSize()
-            .padding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal).asPaddingValues()),
-        contentPadding = WindowInsets.safeDrawing.only(WindowInsetsSides.Vertical).asPaddingValues(),
+        modifier = modifier.fillMaxSize(),
+        contentPadding = WindowInsets.safeDrawing.asPaddingValues(),
     ) {
         items(objects, key = { it.objectID }) { obj ->
             ObjectFrame(
@@ -94,8 +80,8 @@ private fun ObjectFrame(
             .padding(8.dp)
             .clickable { onClick() }
     ) {
-        KamelImage(
-            resource = asyncPainterResource(data = obj.primaryImageSmall),
+        AsyncImage(
+            model = obj.primaryImageSmall,
             contentDescription = obj.title,
             contentScale = ContentScale.Crop,
             modifier = Modifier

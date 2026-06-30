@@ -34,28 +34,35 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import cafe.adriel.voyager.core.screen.Screen
-import cafe.adriel.voyager.koin.getScreenModel
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
+import coil3.compose.AsyncImage
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
-import io.kamel.image.KamelImage
-import io.kamel.image.asyncPainterResource
+import kmp_app_template.shared.generated.resources.Res
+import kmp_app_template.shared.generated.resources.back
+import kmp_app_template.shared.generated.resources.label_artist
+import kmp_app_template.shared.generated.resources.label_credits
+import kmp_app_template.shared.generated.resources.label_date
+import kmp_app_template.shared.generated.resources.label_department
+import kmp_app_template.shared.generated.resources.label_dimensions
+import kmp_app_template.shared.generated.resources.label_medium
+import kmp_app_template.shared.generated.resources.label_repository
+import kmp_app_template.shared.generated.resources.label_title
+import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 
-data class DetailScreen(val objectId: Int) : Screen {
-    @Composable
-    override fun Content() {
-        val navigator = LocalNavigator.currentOrThrow
-        val screenModel: DetailScreenModel = getScreenModel()
+@Composable
+fun DetailScreen(
+    objectId: Int,
+    navigateBack: () -> Unit,
+) {
+    val viewModel = koinViewModel<DetailViewModel>()
 
-        val obj by screenModel.getObject(objectId).collectAsStateWithLifecycle(initialValue = null)
-        AnimatedContent(obj != null) { objectAvailable ->
-            if (objectAvailable) {
-                ObjectDetails(obj!!, onBackClick = { navigator.pop() })
-            } else {
-                EmptyScreenContent(Modifier.fillMaxSize())
-            }
+    val obj by viewModel.getObject(objectId).collectAsStateWithLifecycle(initialValue = null)
+    AnimatedContent(obj != null) { objectAvailable ->
+        if (objectAvailable) {
+            ObjectDetails(obj!!, onBackClick = navigateBack)
+        } else {
+            EmptyScreenContent(Modifier.fillMaxSize())
         }
     }
 }
@@ -73,7 +80,7 @@ private fun ObjectDetails(
                 title = {},
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.back))
                     }
                 }
             )
@@ -85,8 +92,8 @@ private fun ObjectDetails(
                 .verticalScroll(rememberScrollState())
                 .padding(paddingValues)
         ) {
-            KamelImage(
-                resource = asyncPainterResource(data = obj.primaryImageSmall),
+            AsyncImage(
+                model = obj.primaryImageSmall,
                 contentDescription = obj.title,
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
@@ -98,14 +105,14 @@ private fun ObjectDetails(
                 Column(Modifier.padding(12.dp)) {
                     Text(obj.title, style = MaterialTheme.typography.headlineMedium)
                     Spacer(Modifier.height(6.dp))
-                    LabeledInfo("Title", obj.title)
-                    LabeledInfo("Artist", obj.artistDisplayName)
-                    LabeledInfo("Date", obj.objectDate)
-                    LabeledInfo("Dimensions", obj.dimensions)
-                    LabeledInfo("Medium", obj.medium)
-                    LabeledInfo("Department", obj.department)
-                    LabeledInfo("Repository", obj.repository)
-                    LabeledInfo("Credits", obj.creditLine)
+                    LabeledInfo(stringResource(Res.string.label_title), obj.title)
+                    LabeledInfo(stringResource(Res.string.label_artist), obj.artistDisplayName)
+                    LabeledInfo(stringResource(Res.string.label_date), obj.objectDate)
+                    LabeledInfo(stringResource(Res.string.label_dimensions), obj.dimensions)
+                    LabeledInfo(stringResource(Res.string.label_medium), obj.medium)
+                    LabeledInfo(stringResource(Res.string.label_department), obj.department)
+                    LabeledInfo(stringResource(Res.string.label_repository), obj.repository)
+                    LabeledInfo(stringResource(Res.string.label_credits), obj.creditLine)
                 }
             }
         }

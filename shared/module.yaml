@@ -1,20 +1,22 @@
 product: 
   type: lib
-  platforms: [jvm, android, iosArm64, iosSimulatorArm64, iosX64]
+  platforms: [jvm, android, iosArm64, iosSimulatorArm64]
 
 dependencies: 
   - $compose.runtime
   - $compose.foundation
   - $compose.material3
+  - $compose.components.resources
   - $libs.androidx.lifecycle.runtime.compose
   - $libs.ktor.client.core
   - $libs.ktor.client.content.negotiation
   - $libs.ktor.serialization.kotlinx.json
-  - $libs.kamel
+  - $libs.coil.compose
+  - $libs.coil.network.ktor
   - $libs.koin.core
+  - $libs.koin.compose.viewmodel
   - $libs.material.icons.core
-  - $libs.voyager.navigator
-  - $libs.voyager.koin
+  - $libs.navigation.compose
 
 dependencies@android:
   - $libs.ktor.client.okhttp
@@ -23,6 +25,9 @@ dependencies@ios:
   - $libs.ktor.client.darwin
 
 settings: 
-  compose: enabled
+  compose:
+    enabled: true
+    resources:
+      packageName: kmp_app_template.shared.generated.resources
   kotlin:
     serialization: json
