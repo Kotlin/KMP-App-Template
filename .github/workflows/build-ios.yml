@@ -15,11 +15,6 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v4
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'zulu'
-          java-version: 21
       - name: Set Xcode version
         run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
       - name: iOS debug build
