@@ -16,6 +16,6 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
       - name: Set Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_26.0.app/Contents/Developer
+        run: sudo xcode-select -s /Applications/Xcode_26.3.app/Contents/Developer
       - name: iOS debug build
         run: ./kotlin build -m iosApp -p iosSimulatorArm64 -v debug
