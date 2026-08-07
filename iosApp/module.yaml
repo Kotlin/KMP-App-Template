@@ -6,4 +6,6 @@ dependencies:
   - ../shared
 
 settings:
+  kotlin:
+    version: 2.4.10 # TODO remove once the default catches up
   compose: enabled

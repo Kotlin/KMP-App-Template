@@ -30,4 +30,5 @@ settings:
     resources:
       packageName: kmp_app_template.shared.generated.resources
   kotlin:
+    version: 2.4.10 # TODO remove once the default catches up
     serialization: json

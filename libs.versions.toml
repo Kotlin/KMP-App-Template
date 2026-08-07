@@ -1,12 +1,12 @@
 [versions]
 androidx-activity = "1.13.0"
-androidx-lifecycle = "2.10.0"
+androidx-lifecycle = "2.11.0-beta01"
 androidx-navigation = "2.9.2"
-coil = "3.4.0"
+coil = "3.5.0"
 compose-material-icons = "1.7.3"
-koin = "4.2.1"
-kotlinx-coroutines = "1.8.1"
-ktor = "3.4.3"
+koin = "4.2.2"
+kotlinx-coroutines = "1.11.0"
+ktor = "3.5.1"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
