@@ -1,0 +1,10 @@
+product: wasm-js/app
+
+dependencies:
+  - ../shared
+  - $compose.ui
+  - $libs.coil.compose
+  - $libs.coil.network.ktor
+
+settings:
+  compose: enabled

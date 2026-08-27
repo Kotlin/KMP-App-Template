@@ -22,7 +22,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		39328C78C3709E7A6804F01C /* src */ = {
+		39328C78C3709E7A6804F01C /* PBXFileSystemSynchronizedRootGroup */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				39328B7F9944E62EB90E46E2 /* PBXFileSystemSynchronizedBuildFileExceptionSet */,
@@ -53,7 +53,7 @@
 			children = (
 				39328689251DF9513C25544F /* Products */,
 				393286A8F6039FD41E25C11B /* Info.plist */,
-				39328C78C3709E7A6804F01C /* src */,
+				39328C78C3709E7A6804F01C /* PBXFileSystemSynchronizedRootGroup */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,7 +64,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 393282D7645E8F6DDA49CF5E /* Build configuration list for PBXNativeTarget "app" */;
 			buildPhases = (
-				39328FA843134D3FD996EE1F /* Build Kotlin with Amper */,
+				39328FA843134D3FD996EE1F /* Build Kotlin */,
 				393282358FF7C02959BEF1C2 /* Sources */,
 				393283130918FF0FFBC2B306 /* Frameworks */,
 				39328C7D425627F9B3C28542 /* Resources */,
@@ -74,7 +74,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				39328C78C3709E7A6804F01C /* src */,
+				39328C78C3709E7A6804F01C /* PBXFileSystemSynchronizedRootGroup */,
 			);
 			name = app;
 			productName = app;
@@ -111,17 +111,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		39328FA843134D3FD996EE1F /* Build Kotlin with Amper */ = {
+		39328FA843134D3FD996EE1F /* Build Kotlin */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			inputPaths = (
 			);
-			name = "Build Kotlin with Amper";
+			name = "Build Kotlin";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# !AMPER KMP INTEGRATION STEP!\n# This script is managed by the Kotlin Toolchain, do not edit manually!\n\"${KOTLIN_CLI_WRAPPER_PATH}\" tool xcode-integration\n";
+			shellScript = "# !KOTLIN INTEGRATION STEP!\n# This script is managed by the Kotlin Toolchain, do not edit manually!\n\"${KOTLIN_CLI_WRAPPER_PATH}\" tool xcode-integration\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

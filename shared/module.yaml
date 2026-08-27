@@ -1,6 +1,6 @@
 product: 
   type: kmp/lib
-  platforms: [jvm, android, iosArm64, iosSimulatorArm64]
+  platforms: [jvm, android, iosArm64, iosSimulatorArm64, wasmJs]
 
 dependencies: 
   - $compose.runtime
@@ -24,11 +24,13 @@ dependencies@android:
 dependencies@ios:
   - $libs.ktor.client.darwin
 
+dependencies@wasmJs:
+  - $libs.ktor.client.js
+
 settings: 
   compose:
     enabled: true
     resources:
       packageName: kmp_app_template.shared.generated.resources
   kotlin:
-    version: 2.4.10 # TODO remove once the default catches up
     serialization: json
