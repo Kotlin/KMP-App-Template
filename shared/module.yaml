@@ -18,6 +18,9 @@ dependencies:
   - $libs.material.icons.core
   - $libs.navigation.compose
 
+dependencies@jvm:
+  - $libs.ktor.client.okhttp
+
 dependencies@android:
   - $libs.ktor.client.okhttp
 
