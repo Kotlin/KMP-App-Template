@@ -9,6 +9,17 @@ This is a basic Kotlin Multiplatform app template for Android, iOS, desktop, and
 
 ![Screenshots of the app](images/screenshots.png)
 
+### Running the apps
+
+Use the run configurations provided by the run widget in your IDE's toolbar (make sure that you have the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) installed.
+
+You can also use these commands and options:
+
+- Android app: `./kotlin run -m androidApp`
+- Desktop app: `./kotlin run -m desktopApp --compose-hot-reload-mode`
+- Web app: `./kotlin run -m webApp`
+- iOS app: `./kotlin run -m iosApp -p iosSimulatorArm64`, or open the iOS project in Xcode and run it from there.
+
 ### Technologies
 
 The data displayed by the app is from [The Metropolitan Museum of Art Collection API](https://metmuseum.github.io/).
