@@ -21,13 +21,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.jetbrains.kmpapp.data.MuseumObject
 import com.jetbrains.kmpapp.screens.EmptyScreenContent
+import com.jetbrains.kmpapp.screens.placeholderColor
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
@@ -87,7 +87,7 @@ private fun ObjectFrame(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
-                .background(Color.LightGray),
+                .background(placeholderColor(obj.objectID)),
         )
 
         Spacer(Modifier.height(2.dp))
