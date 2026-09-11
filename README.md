@@ -3,11 +3,22 @@
 [![official project](http://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-This is a basic Kotlin Multiplatform app template for Android and iOS. It includes shared business logic and data handling, and a shared UI implementation using Compose Multiplatform.
+This is a basic Kotlin Multiplatform app template for Android, iOS, desktop, and web. It includes shared business logic and data handling, and a shared UI implementation using Compose Multiplatform.
 
 > The template is also available [with native UI written in Jetpack Compose and SwiftUI](https://github.com/kotlin/KMP-App-Template-Native).
 
 ![Screenshots of the app](images/screenshots.png)
+
+### Running the apps
+
+Use the run configurations provided by the run widget in your IDE's toolbar (make sure that you have the [Kotlin Multiplatform plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform) installed.
+
+You can also use these commands and options:
+
+- Android app: `./kotlin run -m androidApp`
+- Desktop app: `./kotlin run -m desktopApp --compose-hot-reload-mode`
+- Web app: `./kotlin run -m webApp`
+- iOS app: `./kotlin run -m iosApp -p iosSimulatorArm64`, or open the iOS project in Xcode and run it from there.
 
 ### Technologies
 

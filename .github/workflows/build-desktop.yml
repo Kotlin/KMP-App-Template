@@ -1,0 +1,19 @@
+name: Build desktop app
+
+on:
+  push:
+    branches:
+      - kotlin-toolchain
+  pull_request:
+
+jobs:
+  test:
+    name: Build
+    runs-on: ubuntu-latest
+    # Only run build in template repo
+    if: github.event.repository.name == 'KMP-App-Template' && github.repository_owner == 'Kotlin'
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Desktop debug build
+        run: ./kotlin build -m desktopApp
