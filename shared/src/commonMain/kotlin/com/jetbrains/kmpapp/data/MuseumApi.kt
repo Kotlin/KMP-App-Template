@@ -16,13 +16,6 @@ class KtorMuseumApi(private val client: HttpClient) : MuseumApi {
     }
 
     override suspend fun getData(): List<MuseumObject> {
-        return try {
-            client.get(API_URL).body()
-        } catch (e: Exception) {
-            if (e is CancellationException) throw e
-            e.printStackTrace()
-
-            emptyList()
-        }
+        return client.get(API_URL).body()
     }
 }

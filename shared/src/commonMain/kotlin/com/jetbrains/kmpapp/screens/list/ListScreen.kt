@@ -3,9 +3,12 @@ package com.jetbrains.kmpapp.screens.list
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,16 +38,32 @@ fun ListScreen(
     navigateToDetails: (objectId: Int) -> Unit
 ) {
     val viewModel = koinViewModel<ListViewModel>()
-    val objects by viewModel.objects.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    AnimatedContent(objects.isNotEmpty()) { objectsAvailable ->
-        if (objectsAvailable) {
-            ObjectGrid(
-                objects = objects,
-                onObjectClick = navigateToDetails,
-            )
-        } else {
-            EmptyScreenContent(Modifier.fillMaxSize())
+    AnimatedContent(uiState) { state ->
+        when (state) {
+            is ListUiState.Loading -> {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
+            }
+            is ListUiState.Error -> {
+                Text(
+                    text = state.message,
+                    modifier = Modifier.padding(16.dp),
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
+            is ListUiState.Success -> {
+                if (state.objects.isNotEmpty()) {
+                    ObjectGrid(
+                        objects = state.objects,
+                        onObjectClick = navigateToDetails,
+                    )
+                } else {
+                    EmptyScreenContent(Modifier.fillMaxSize())
+                }
+            }
         }
     }
 }
